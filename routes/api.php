@@ -15,11 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('user/login', 'UserController@login');
 Route::post('user/register', 'UserController@register');
+Route::get('dictionaries', 'DictionariesController@view');
 
- Route::group([
-  'middleware' => 'auth:api'
-], function() {
+
+Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user/update', 'UserController@update');
     Route::get('user/me', 'UserController@me');
-    // Route::get('user', 'AuthController@user');
 });

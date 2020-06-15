@@ -1,0 +1,610 @@
+[
+    {
+        "name": "Австралийская овчарка",
+        "img": "breeds/dogs/2-5-735x562.png"
+    },
+    {
+        "name": "Австралийская пастушья собака",
+        "img": "breeds/dogs/3-5-735x602.png"
+    },
+    {
+        "name": "Австралийский келпи",
+        "img": "breeds/dogs/4-5-735x542.png"
+    },
+    {
+        "name": "Австралийский терьер",
+        "img": "breeds/dogs/5-5-735x579.png"
+    },
+    {
+        "name": "Австрийская гончая",
+        "img": "breeds/dogs/6-5-735x508.png"
+    },
+    {
+        "name": "Азавак",
+        "img": "breeds/dogs/7-5-735x525.png"
+    },
+    {
+        "name": "Акита-ину",
+        "img": "breeds/dogs/8-5-735x543.png"
+    },
+    {
+        "name": "Алано",
+        "img": "breeds/dogs/9-5-735x585.png"
+    },
+    {
+        "name": "Аляскинский Кли-Кай",
+        "img": "breeds/dogs/10-5-735x489.png"
+    },
+    {
+        "name": "Аляскинский маламут",
+        "img": "breeds/dogs/11-5-735x492.png"
+    },
+    {
+        "name": "Американская акита",
+        "img": "breeds/dogs/12-2-735x532.png"
+    },
+    {
+        "name": "Американский бандог",
+        "img": "breeds/dogs/13-1-735x569.png"
+    },
+    {
+        "name": "Американский бульдог",
+        "img": "breeds/dogs/14-1-735x570.png"
+    },
+    {
+        "name": "Американский голый терьер",
+        "img": "breeds/dogs/15-1-735x551.png"
+    },
+    {
+        "name": "Американский стаффордширский терьер",
+        "img": "breeds/dogs/16-735x526.png"
+    },
+    {
+        "name": "Анатолийская овчарка",
+        "img": "breeds/dogs/17-735x561.png"
+    },
+    {
+        "name": "Английская овчарка",
+        "img": "breeds/dogs/18-735x546.png"
+    },
+    {
+        "name": "Английский бульдог",
+        "img": "breeds/dogs/19-735x591.png"
+    },
+    {
+        "name": "Английский кокер-спаниель",
+        "img": "breeds/dogs/20-735x537.png"
+    },
+    {
+        "name": "Английский мастиф",
+        "img": "breeds/dogs/21-735x503.png"
+    },
+    {
+        "name": "Английский сеттер",
+        "img": "breeds/dogs/22-735x527.png"
+    },
+    {
+        "name": "Английский той-терьер",
+        "img": "breeds/dogs/23-735x532.png"
+    },
+    {
+        "name": "Английский фоксхаунд",
+        "img": "breeds/dogs/24-735x490.png"
+    },
+    {
+        "name": "Аргентинский дог",
+        "img": "breeds/dogs/25-735x500.png"
+    },
+    {
+        "name": "Афганская борзая",
+        "img": "breeds/dogs/26-735x592.png"
+    },
+    {
+        "name": "Аффенпинчер",
+        "img": "breeds/dogs/27-735x545.png"
+    },
+    {
+        "name": "Басенджи",
+        "img": "breeds/dogs/28-735x525.png"
+    },
+    {
+        "name": "Бассет-хаунд",
+        "img": "breeds/dogs/29-735x536.png"
+    },
+    {
+        "name": "Бедлингтон-терьер",
+        "img": "breeds/dogs/30-735x562.png"
+    },
+    {
+        "name": "Белая швейцарская овчарка",
+        "img": "breeds/dogs/31-735x552.png"
+    },
+    {
+        "name": "Бельгийский гриффон",
+        "img": "breeds/dogs/32-735x588.png"
+    },
+    {
+        "name": "Бельгийская овчарка",
+        "img": "breeds/dogs/1-6-735x506.png"
+    },
+    {
+        "name": "Бернский зенненхунд",
+        "img": "breeds/dogs/1-7-735x521.png"
+    },
+    {
+        "name": "Бивер-йоркширский терьер",
+        "img": "breeds/dogs/2-6-735x557.png"
+    },
+    {
+        "name": "Бигль",
+        "img": "breeds/dogs/3-6-735x603.png"
+    },
+    {
+        "name": "Бишон фризе",
+        "img": "breeds/dogs/4-6-735x575.png"
+    },
+    {
+        "name": "Бладхаунд",
+        "img": "breeds/dogs/5-6-735x543.png"
+    },
+    {
+        "name": "Бобтейл",
+        "img": "breeds/dogs/6-6-735x559.png"
+    },
+    {
+        "name": "Болоньез",
+        "img": "breeds/dogs/7-6-735x511.png"
+    },
+    {
+        "name": "Бордер-колли",
+        "img": "breeds/dogs/8-6-735x513.png"
+    },
+    {
+        "name": "Бордоский дог",
+        "img": "breeds/dogs/9-6-735x582.png"
+    },
+    {
+        "name": "Босерон",
+        "img": "breeds/dogs/10-6-735x580.png"
+    },
+    {
+        "name": "Бостон-терьер",
+        "img": "breeds/dogs/11-6-735x545.png"
+    },
+    {
+        "name": "Бразильский фила",
+        "img": "breeds/dogs/12-3-735x549.png"
+    },
+    {
+        "name": "Брюссельский гриффон",
+        "img": "breeds/dogs/13-2-735x528.png"
+    },
+    {
+        "name": "Бульмастиф",
+        "img": "breeds/dogs/14-2-735x555.png"
+    },
+    {
+        "name": "Бультерьер",
+        "img": "breeds/dogs/15-2-735x547.png"
+    },
+    {
+        "name": "Бурбуль",
+        "img": "breeds/dogs/16-1-735x596.png"
+    },
+    {
+        "name": "Веймаранер",
+        "img": "breeds/dogs/17-1-735x599.png"
+    },
+    {
+        "name": "Вельш корги кардиган",
+        "img": "breeds/dogs/18-1-735x533.png"
+    },
+    {
+        "name": "Вельш корги пемброк",
+        "img": "breeds/dogs/19-1-735x568.png"
+    },
+    {
+        "name": "Венгерская борзая",
+        "img": "breeds/dogs/20-1-735x618.png"
+    },
+    {
+        "name": "Веттерхун",
+        "img": "breeds/dogs/21-1-735x526.png"
+    },
+    {
+        "name": "Вольфшпиц",
+        "img": "breeds/dogs/22-1-735x640.png"
+    },
+    {
+        "name": "Восточносибирская лайка",
+        "img": "breeds/dogs/23-1-735x599.png"
+    },
+    {
+        "name": "Гампр",
+        "img": "breeds/dogs/24-1-735x537.png"
+    },
+    {
+        "name": "Голландская овчарка",
+        "img": "breeds/dogs/25-1-735x536.png"
+    },
+    {
+        "name": "Голландский смаусхонд",
+        "img": "breeds/dogs/26-1-735x526.png"
+    },
+    {
+        "name": "Гренландская собака",
+        "img": "breeds/dogs/27-1-735x578.png"
+    },
+    {
+        "name": "Грейхаунд",
+        "img": "breeds/dogs/28-1-735x483.png"
+    },
+    {
+        "name": "Далматин",
+        "img": "breeds/dogs/29-1-735x553.png"
+    },
+    {
+        "name": "Джек-Рассел терьер",
+        "img": "breeds/dogs/30-1-735x523.png"
+    },
+    {
+        "name": "Доберман",
+        "img": "breeds/dogs/31-1-735x541.png"
+    },
+    {
+        "name": "Дратхаар",
+        "img": "breeds/dogs/32-1-735x571.png"
+    },
+    {
+        "name": "Древер",
+        "img": "breeds/dogs/33-735x564.png"
+    },
+    {
+        "name": "Евразиер",
+        "img": "breeds/dogs/34-735x483.png"
+    },
+    {
+        "name": "Западносибирская лайка",
+        "img": "breeds/dogs/35-735x512.png"
+    },
+    {
+        "name": "Золотистый ретривер",
+        "img": "breeds/dogs/1-8-735x532.png"
+    },
+    {
+        "name": "Ирландский волкодав",
+        "img": "breeds/dogs/5-735x536.png"
+    },
+    {
+        "name": "Ирландский терьер",
+        "img": "breeds/dogs/2-7-735x578.png"
+    },
+    {
+        "name": "Исландская собака",
+        "img": "breeds/dogs/3-7-735x551.png"
+    },
+    {
+        "name": "Испанский гальго",
+        "img": "breeds/dogs/4-7-735x563.png"
+    },
+    {
+        "name": "Йоркширский терьер",
+        "img": "breeds/dogs/5-7-735x523.png"
+    },
+    {
+        "name": "Кавалер-кинг-чарльз-спаниель",
+        "img": "breeds/dogs/6-7-735x545.png"
+    },
+    {
+        "name": "Кавказская овчарка",
+        "img": "breeds/dogs/7-7-735x517.png"
+    },
+    {
+        "name": "Кане-корсо",
+        "img": "breeds/dogs/8-7-735x584.png"
+    },
+    {
+        "name": "Карело-финская лайка",
+        "img": "breeds/dogs/9-7-735x598.png"
+    },
+    {
+        "name": "Карликовый пинчер",
+        "img": "breeds/dogs/10-7-735x564.png"
+    },
+    {
+        "name": "Карликовый шнауцер",
+        "img": "breeds/dogs/11-7-735x588.png"
+    },
+    {
+        "name": "Керн-терьер",
+        "img": "breeds/dogs/12-4-735x603.png"
+    },
+    {
+        "name": "Керри-блю-терьер",
+        "img": "breeds/dogs/13-3-735x559.png"
+    },
+    {
+        "name": "Китайская хохлатая собака",
+        "img": "breeds/dogs/14-3-735x595.png"
+    },
+    {
+        "name": "Коикерхондье",
+        "img": "breeds/dogs/15-3-735x516.png"
+    },
+    {
+        "name": "Кромфорлендер",
+        "img": "breeds/dogs/16-2-735x479.png"
+    },
+    {
+        "name": "Ксолоитцкуинтли",
+        "img": "breeds/dogs/17-2-735x532.png"
+    },
+    {
+        "name": "Курцхаар",
+        "img": "breeds/dogs/18-2-735x567.png"
+    },
+    {
+        "name": "Лабрадор-ретривер",
+        "img": "breeds/dogs/20-2-735x551.png"
+    },
+    {
+        "name": "Лабрадудель",
+        "img": "breeds/dogs/21-2-735x461.png"
+    },
+    {
+        "name": "Лангхаар",
+        "img": "breeds/dogs/22-2-735x546.png"
+    },
+    {
+        "name": "Ландсир",
+        "img": "breeds/dogs/23-2-735x553.png"
+    },
+    {
+        "name": "Левретка",
+        "img": "breeds/dogs/24-2-735x509.png"
+    },
+    {
+        "name": "Леонбергер",
+        "img": "breeds/dogs/25-2-735x590.png"
+    },
+    {
+        "name": "Лхаса Апсо",
+        "img": "breeds/dogs/26-2-735x568.png"
+    },
+    {
+        "name": "Майоркская овчарка",
+        "img": "breeds/dogs/27-2-735x700.png"
+    },
+    {
+        "name": "Мальтийская болонка",
+        "img": "breeds/dogs/28-2-735x559.png"
+    },
+    {
+        "name": "Мопс",
+        "img": "breeds/dogs/29-2-735x551.png"
+    },
+    {
+        "name": "Миттельшнауцер",
+        "img": "breeds/dogs/30-2-735x527.png"
+    },
+    {
+        "name": "Муди",
+        "img": "breeds/dogs/31-2-735x569.png"
+    },
+    {
+        "name": "Неаполитанский мастиф",
+        "img": "breeds/dogs/33-1-735x494.png"
+    },
+    {
+        "name": "Немецкий боксер",
+        "img": "breeds/dogs/1-9-735x514.png"
+    },
+    {
+        "name": "Немецкий дог",
+        "img": "breeds/dogs/2-8-735x557.png"
+    },
+    {
+        "name": "Немецкая овчарка",
+        "img": "breeds/dogs/3-8-735x511.png"
+    },
+    {
+        "name": "Немецкий пинчер",
+        "img": "breeds/dogs/4-8-735x615.png"
+    },
+    {
+        "name": "Немецкий шпиц",
+        "img": "breeds/dogs/5-8-735x551.png"
+    },
+    {
+        "name": "Норвежский бухунд",
+        "img": "breeds/dogs/6-8-735x572.png"
+    },
+    {
+        "name": "Норвич-терьер",
+        "img": "breeds/dogs/7-8-735x545.png"
+    },
+    {
+        "name": "Ньюфаундленд",
+        "img": "breeds/dogs/10-735x576.png"
+    },
+    {
+        "name": "Папильон",
+        "img": "breeds/dogs/8-8-735x582.png"
+    },
+    {
+        "name": "Пекинес",
+        "img": "breeds/dogs/9-8-735x546.png"
+    },
+    {
+        "name": "Пиренейская овчарка",
+        "img": "breeds/dogs/10-8-735x545.png"
+    },
+    {
+        "name": "Пиренейский мастиф",
+        "img": "breeds/dogs/11-8-735x591.png"
+    },
+    {
+        "name": "Пойнтер",
+        "img": "breeds/dogs/12-5-735x588.png"
+    },
+    {
+        "name": "Померанский шпиц",
+        "img": "breeds/dogs/1-4-735x628.png"
+    },
+    {
+        "name": "Пражский крысарик",
+        "img": "breeds/dogs/13-4-735x572.png"
+    },
+    {
+        "name": "Пудель",
+        "img": "breeds/dogs/14-4-735x541.png"
+    },
+    {
+        "name": "Ризеншнауцер",
+        "img": "breeds/dogs/15-4-735x583.png"
+    },
+    {
+        "name": "Родезийский риджбек",
+        "img": "breeds/dogs/16-3-735x534.png"
+    },
+    {
+        "name": "Ротвейлер",
+        "img": "breeds/dogs/17-3-735x524.png"
+    },
+    {
+        "name": "Русская псовая борзая",
+        "img": "breeds/dogs/18-3-735x506.png"
+    },
+    {
+        "name": "Русский охотничий спаниель",
+        "img": "breeds/dogs/19-2-735x551.png"
+    },
+    {
+        "name": "Русский той-терьер",
+        "img": "breeds/dogs/20-3-735x630.png"
+    },
+    {
+        "name": "Салюки",
+        "img": "breeds/dogs/21-3-735x559.png"
+    },
+    {
+        "name": "Самоедская собака",
+        "img": "breeds/dogs/22-3-735x623.png"
+    },
+    {
+        "name": "Сенбернар",
+        "img": "breeds/dogs/23-3-735x542.png"
+    },
+    {
+        "name": "Сиба-ину",
+        "img": "breeds/dogs/24-3-735x535.png"
+    },
+    {
+        "name": "Сибирский хаски",
+        "img": "breeds/dogs/25-3-735x512.png"
+    },
+    {
+        "name": "Среднеазиатская овчарка",
+        "img": "breeds/dogs/26-3-735x575.png"
+    },
+    {
+        "name": "Тайваньская собака",
+        "img": "breeds/dogs/1-10-735x525.png"
+    },
+    {
+        "name": "Тибетский терьер",
+        "img": "breeds/dogs/2-9-735x541.png"
+    },
+    {
+        "name": "Тоса-ину",
+        "img": "breeds/dogs/3-9-735x561.png"
+    },
+    {
+        "name": "Уиппет",
+        "img": "breeds/dogs/4-9-735x578.png"
+    },
+    {
+        "name": "Фараонова собака",
+        "img": "breeds/dogs/5-9-735x488.png"
+    },
+    {
+        "name": "Финская гончая",
+        "img": "breeds/dogs/6-9-735x524.png"
+    },
+    {
+        "name": "Финский лаппхунд",
+        "img": "breeds/dogs/7-9-735x546.png"
+    },
+    {
+        "name": "Французский бульдог",
+        "img": "breeds/dogs/8-9-735x627.png"
+    },
+    {
+        "name": "Ханаанская собака",
+        "img": "breeds/dogs/9-9-735x531.png"
+    },
+    {
+        "name": "Ховаварт",
+        "img": "breeds/dogs/10-9-735x552.png"
+    },
+    {
+        "name": "Хорватская овчарка",
+        "img": "breeds/dogs/11-9-735x551.png"
+    },
+    {
+        "name": "Чау-чау",
+        "img": "breeds/dogs/12-6-735x548.png"
+    },
+    {
+        "name": "Чинук",
+        "img": "breeds/dogs/13-5-735x506.png"
+    },
+    {
+        "name": "Чихуахуа",
+        "img": "breeds/dogs/14-5-735x588.png"
+    },
+    {
+        "name": "Шарпей",
+        "img": "breeds/dogs/15-5-735x544.png"
+    },
+    {
+        "name": "Шапендуа",
+        "img": "breeds/dogs/16-4-735x567.png"
+    },
+    {
+        "name": "Шотландская овчарка",
+        "img": "breeds/dogs/17-4-735x610.png"
+    },
+    {
+        "name": "Шипперке",
+        "img": "breeds/dogs/18-4-735x469.png"
+    },
+    {
+        "name": "Ши-тцу",
+        "img": "breeds/dogs/19-3-735x562.png"
+    },
+    {
+        "name": "Эрдельтерьер",
+        "img": "breeds/dogs/20-4-735x568.png"
+    },
+    {
+        "name": "Эстонская гончая",
+        "img": "breeds/dogs/21-4-735x542.png"
+    },
+    {
+        "name": "Эштрельская овчарка",
+        "img": "breeds/dogs/22-4-735x594.png"
+    },
+    {
+        "name": "Ямтхунд",
+        "img": "breeds/dogs/24-4-735x552.png"
+    },
+    {
+        "name": "Японский хин",
+        "img": "breeds/dogs/25-4-735x553.png"
+    },
+    {
+        "name": "Японский шпиц",
+        "img": "breeds/dogs/26-4-735x551.png"
+    }
+]
