@@ -18,7 +18,10 @@ class AnimalResource extends JsonResource
             'name' => $this->name,
             'id' => $this->id,
             'img' => asset('/storage/' . $this->img),
-            'breeds' => BreedResource::collection($this->breeds)
+            'breeds' => BreedResource::collection($this->breeds),
+            'male' => $this->male,
+            'female' => $this->female,
+            '_none' => $this->_none,
         ];
     }
 }
