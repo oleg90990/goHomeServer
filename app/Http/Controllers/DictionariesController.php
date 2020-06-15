@@ -12,7 +12,8 @@ class DictionariesController extends Controller
         $animals = Animal::with('breeds')->get();
 
         return $this->successResponse([
-            'animals' => AnimalResource::collection($animals)
+            'animals' => AnimalResource::collection($animals),
+            'colors' => []
         ]);
     }
 }
