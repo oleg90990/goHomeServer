@@ -20,5 +20,6 @@ Route::post('user/register', 'UserController@register');
   'middleware' => 'auth:api'
 ], function() {
     Route::post('user/update', 'UserController@update');
+    Route::get('user/me', 'UserController@me');
     // Route::get('user', 'AuthController@user');
 });

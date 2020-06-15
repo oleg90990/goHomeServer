@@ -20,7 +20,7 @@ class Controller extends BaseController
         ], $code); 
     }
 
-    public function successResponse(array $data, $code = 200)
+    public function successResponse($data, $code = 200)
     {
         return response()->json($data, $code); 
     }

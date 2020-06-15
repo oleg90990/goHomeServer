@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client as OClient; 
 use Carbon\Carbon;
+use App\Http\Resources\UserProfileResource;
 use App\Http\Requests\{
     LoginRequest,
     RegisterRequest,
@@ -24,16 +25,16 @@ class UserController extends Controller
 
         $auth = Auth::attempt($inputs);
 
-        if ($auth) { 
-            $user = $request->user();
-
-            return $this->successResponse([
-                'access_token' => $user->createAccessToken(),
-                'user' => $user
-            ]);
+        if (!$auth) { 
+            return $this->errorResponse('Пользователь не найден', 401); 
         }
 
-        return $this->errorResponse('Пользователь не найден', 401); 
+        $user = auth()->user();
+
+        return $this->successResponse([
+            'access_token' => $user->createAccessToken(),
+            'user' => new UserProfileResource($user)
+        ]);
     }
 
     public function register(RegisterRequest $request)
@@ -50,7 +51,7 @@ class UserController extends Controller
 
         return $this->successResponse([
             'access_token' => $user->createAccessToken(),
-            'user' => $user
+            'user' => new UserProfileResource($user)
         ]);
     }
 
@@ -62,15 +63,24 @@ class UserController extends Controller
             'password'
         ]);
 
-        if (isset($inputs['password']) || $inputs['password']) {
+        if (isset($inputs['password']) && $inputs['password']) {
             $inputs['password'] = bcrypt($inputs['password']);
         } else {
             unset($inputs['password']);
         }
 
-        $user = $request->user();
-        $user->update($inputs);
+        $request
+            ->user()
+            ->update($inputs);
 
-        return $this->successResponse($user->toArray());
+        return $this->successResponse(
+            new UserProfileResource(auth()->user())
+        );
+    }
+
+    public function me() {
+        return $this->successResponse(
+            new UserProfileResource(auth()->user())
+        );
     }
 }
