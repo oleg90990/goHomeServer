@@ -38,6 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function ads()
+    {
+        return $this->hasMany('App\Ad');
+    }
+
     public function createAccessToken(): string
     {
         return $this->createToken('token')
