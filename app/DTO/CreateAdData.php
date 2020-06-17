@@ -5,6 +5,7 @@ namespace App\DTO;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\DataTransferObject\DataTransferObject;
 use App\Http\Requests\AdsRequest;
+use App\Enums\YesNo;
 
 class CreateAdData extends DataTransferObject
 {
@@ -27,7 +28,7 @@ class CreateAdData extends DataTransferObject
             'age' => $request->get('age'),
             'phone' => $request->get('phone'),
             'gender' => $request->get('gender'),
-            'sterilization' => $request->get('sterilization'),
+            'sterilization' => $request->get('sterilization', YesNo::None),
             'colors' => $request->get('colors', []),
             'breed_id' => $request->get('breed_id', null),
             'animal_id' => $request->get('animal_id'),

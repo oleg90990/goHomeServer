@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Classes\ImageManipulator;
 
 class BreedResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class BreedResource extends JsonResource
         return [
             'name' => $this->name,
             'id' => $this->id,
-            'img' => asset('/storage/' . $this->img)
+            'img' => ImageManipulator::getPublicUri($this->img)
         ];
     }
 }

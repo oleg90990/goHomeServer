@@ -17,15 +17,15 @@ class CreateAdsTable extends Migration
             $table->id();
             $table->string('title');
             $table->integer('animal_id')->references('id')->on('animals');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->integer('breed_id')->references('id')->on('breeds')->nullable();
             $table->string('phone');
             $table->integer('age');
             $table->boolean('active');
             $table->integer('user_id')->references('id')->on('users');
             $table->string('gender');
-            $table->boolean('sterilization');
-            $table->json('images');
+            $table->string('sterilization');
+            $table->json('images')->nullable();
             $table->timestamps();
         });
     }

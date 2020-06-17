@@ -8,6 +8,8 @@ use Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdsRequest;
 use App\DTO\CreateAdData;
+use App\Http\Resources\AdResource;
+use App\Classes\ImageManipulator;
 
 class AdsController extends Controller
 {
@@ -25,7 +27,6 @@ class AdsController extends Controller
     {
         $this->middleware(function ($request, $next) {
             $this->user = auth()->user();
-            $this->storage = Storage::disk('public');
             return $next($request);
         });
     }
@@ -44,7 +45,7 @@ class AdsController extends Controller
             'user_id' => $this->user->id,
             'breed_id' => $data->breed_id,
             'animal_id' => $data->animal_id,
-            'images' => $this->saveImagesFromBase64($data->images),
+            'images' => ImageManipulator::saveFromBase64($data->images, $this->user),
             'active' => true
         ]);
 
@@ -53,22 +54,27 @@ class AdsController extends Controller
         $ad->colors()
            ->attach($data->colors);
 
-        return $this->successResponse($ad);
+        return $this->successResponse(
+            new AdResource($ad)
+        );
     }
 
-    private function saveImagesFromBase64(array $images) {
-        $results = [];
-        foreach ($images as $image) {
-            $name = "photos/" . $this->user->id . "/" . uniqid() . ".jpeg";
+    public function me() {
+        $userAds = $this
+            ->user
+            ->ads()
+            ->with('colors')
+            ->get();
 
-            $result = $this
-                ->storage
-                ->put($name, $image);
+        return $this->successResponse(
+            AdResource::collection($userAds)
+        );
+    }
 
-            if ($result) {
-                $results[] = $name;
-            }
-        }
-        return $results;
+    public function find() {
+        $findAds = Ad::with('colors')->get();
+        return $this->successResponse(
+            AdResource::collection($findAds)
+        );
     }
 }
