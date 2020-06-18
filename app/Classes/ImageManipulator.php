@@ -5,15 +5,17 @@ namespace App\Classes;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Storage;
+use Gumlet\ImageResize;
 
 class ImageManipulator
 {
     /**
      * Get the breeds for the animal.
      */
-    public static function save(string $name, string $image)
+    public static function saveForUser(int $userId, string $image)
     {
-        return Storage::disk('public')->put($name, $image);
+        $name = "photos/$userId/" . uniqid() . ".jpeg";
+        return Storage::disk('public')->put($name, $image) ? $name : false;
     }
 
     /**
@@ -23,10 +25,12 @@ class ImageManipulator
     {
         $results = [];
 
-        foreach ($images as $image) {
-            $name = "photos/" . $user->id . "/" . uniqid() . ".jpeg";
+        foreach ($images as $base64Image) {
+            $img = ImageResize::createFromString($base64Image);
+            $img->resizeToWidth(800);
+            $string = $img->getImageAsString();
 
-            if (self::save($name, $image)) {
+            if ($name = self::saveForUser($user->id, $string)) {
                 $results[] = $name;
             }
         }
