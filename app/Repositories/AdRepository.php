@@ -126,6 +126,8 @@ class AdRepository
         $colors = $data->colors;
 
         $query = Ad::query();
+
+        $query->where('active', 1);
         $query->where('age', '>=', $data->ages['from']);
         $query->where('age', '<=', $data->ages['to']);
 
