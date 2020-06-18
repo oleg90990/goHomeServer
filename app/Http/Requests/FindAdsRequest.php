@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\Gender;
+use App\Enums\YesNo;
 
-class AdsPublishRequest extends FormRequest
+class FindAdsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +25,15 @@ class AdsPublishRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'active' => 'required|boolean',
-            'id' => 'required|numeric'
+            "animal" => 'numeric',
+            "gender" => 'enum_value:' . Gender::class,
+            "sterilization" => 'enum_value:' . YesNo::class,
+            "ages.from" => 'required|numeric',
+            "ages.to" => 'required|numeric',
+            "sortBy" => 'required',
+            "page" => 'required|numeric',
         ];
     }
 }

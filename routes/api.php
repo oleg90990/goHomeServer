@@ -21,7 +21,9 @@ Route::post('ads/find', 'AdsController@find');
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user/update', 'UserController@update');
     Route::get('user/me', 'UserController@me');
+
     Route::post('ads/store', 'AdsController@store');
     Route::get('ads/me', 'AdsController@me');
-    Route::post('ads/{id}/publish', 'AdsController@publish');
+    Route::post('ads/publish', 'AdsController@publish');
+    Route::post('ads/update', 'AdsController@update');
 });

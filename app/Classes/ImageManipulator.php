@@ -9,6 +9,9 @@ use Gumlet\ImageResize;
 
 class ImageManipulator
 {
+
+    const PublicPath = '/storage/';
+
     /**
      * Get the breeds for the animal.
      */
@@ -18,6 +21,12 @@ class ImageManipulator
         return Storage::disk('public')->put($name, $image) ? $name : false;
     }
 
+    public static function resize(string $base64) {
+        $img = ImageResize::createFromString($base64);
+        $img->resizeToWidth(800);
+        return $img->getImageAsString();
+    }
+
     /**
      * Get the breeds for the animal.
      */
@@ -25,13 +34,16 @@ class ImageManipulator
     {
         $results = [];
 
-        foreach ($images as $base64Image) {
-            $img = ImageResize::createFromString($base64Image);
-            $img->resizeToWidth(800);
-            $string = $img->getImageAsString();
+        foreach ($images as $image) {
+            if (strpos($image, 'http') !== false) {
+                $parse_url = parse_url($image);
+                $results[] = str_replace(self::PublicPath, '', $parse_url['path']);
+            } else {
+                $string = self::resize(base64_decode($image));
 
-            if ($name = self::saveForUser($user->id, $string)) {
-                $results[] = $name;
+                if ($name = self::saveForUser($user->id, $string)) {
+                    $results[] = $name;
+                }
             }
         }
 
@@ -42,7 +54,7 @@ class ImageManipulator
      * Get the breeds for the animal.
      */
     public static function getPublicUri(string $patch) {
-        return asset('/storage/' . $patch);
+        return asset(self::PublicPath . $patch);
     }
 }
 

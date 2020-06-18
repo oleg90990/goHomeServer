@@ -1,5 +1,9 @@
 [
     {
+        "name": "Метис",
+        "img": "breeds/dogs/color-223334_0.jpg"
+    },
+    {
         "name": "Австралийская овчарка",
         "img": "breeds/dogs/2-5-735x562.png"
     },

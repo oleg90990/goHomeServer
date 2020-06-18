@@ -8,11 +8,17 @@ use Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\{
     AdsRequest,
-    AdsPublishRequest
+    AdsPublishRequest,
+    AdsUpdateRequest,
+    FindAdsRequest
 };
-use App\DTO\CreateAdData;
+use App\DTO\{
+    CreateAdData,
+    UpdateAdData,
+    FindAdData
+};
 use App\Http\Resources\AdResource;
-use App\Classes\ImageManipulator;
+use App\Repositories\AdRepository;
 
 class AdsController extends Controller
 {
@@ -22,14 +28,20 @@ class AdsController extends Controller
     protected $user;
 
     /**
+     * The repository for Ad model
+     */
+    protected $repository;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AdRepository $repository)
     {
-        $this->middleware(function ($request, $next) {
+        $this->middleware(function ($request, $next) use ($repository) {
             $this->user = auth()->user();
+            $this->repository = $repository;
             return $next($request);
         });
     }
@@ -38,24 +50,8 @@ class AdsController extends Controller
     {
         $data = CreateAdData::fromRequest($request);
 
-        $ad = new Ad([
-            'title' => $data->title,
-            'content' => $data->content,
-            'age' => $data->age,
-            'phone' => $data->phone,
-            'gender' => $data->gender,
-            'sterilization' => $data->sterilization,
-            'user_id' => $this->user->id,
-            'breed_id' => $data->breed_id,
-            'animal_id' => $data->animal_id,
-            'images' => ImageManipulator::saveFromBase64($data->images, $this->user),
-            'active' => true
-        ]);
-
-        $ad->save();
-
-        $ad->colors()
-           ->attach($data->colors);
+        $ad = $this->repository
+            ->create($data, $this->user);
 
         return $this->successResponse(
             new AdResource($ad)
@@ -63,35 +59,57 @@ class AdsController extends Controller
     }
 
     public function me() {
-        $userAds = $this
-            ->user
-            ->ads()
-            ->with('colors')
-            ->get();
+        $ads = $this->repository
+            ->getAllFromUser($this->user);
 
         return $this->successResponse(
-            AdResource::collection($userAds)
+            AdResource::collection($ads)
         );
     }
 
-    public function find() {
-        $findAds = Ad::with('colors')->get();
+    public function find(FindAdsRequest $request) {
+        $data = FindAdData::fromRequest($request);
+
+        $ads = $this
+            ->repository
+            ->find($data);
+
         return $this->successResponse(
-            AdResource::collection($findAds)
+            AdResource::collection($ads)
         );
     }
 
-    public function publish(AdsPublishRequest $request, $id) {
-        $ad = $this->user->ads()
-            ->where('id', $id)
-            ->first();
+    public function publish(AdsPublishRequest $request) {
+        $id = $request->get('id');
+
+        $ad = $this
+            ->repository
+            ->getByIdFromUser($this->user, $id);
 
         if (!$ad) {
             return $this->errorResponse('Объявление не найдено', 404); 
         }
 
-        $ad->active = $request->get('active');
-        $ad->save();
+        $this->repository
+            ->publish($ad, $request->get('active', false));
+
+        return $this->successResponse(
+            new AdResource($ad)
+        );
+    }
+
+    public function update(AdsUpdateRequest $request) {
+        $data = UpdateAdData::fromRequest($request);
+
+        $ad = $this->repository
+            ->getByIdFromUser($this->user, $data->id);
+
+        if (!$ad) {
+            return $this->errorResponse('Объявление не найдено', 404); 
+        }
+
+        $ad = $this->repository
+            ->update($ad, $data, $this->user);
 
         return $this->successResponse(
             new AdResource($ad)

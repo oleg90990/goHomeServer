@@ -26,7 +26,7 @@ class UserController extends Controller
         $auth = Auth::attempt($inputs);
 
         if (!$auth) { 
-            return $this->errorResponse('Пользователь не найден', 401); 
+            return $this->errorResponse('Пользователь не найден', 403); 
         }
 
         $user = auth()->user();
