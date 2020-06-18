@@ -6,7 +6,10 @@ use App\Ad;
 use App\User;
 use Storage;
 use Illuminate\Http\Request;
-use App\Http\Requests\AdsRequest;
+use App\Http\Requests\{
+    AdsRequest,
+    AdsPublishRequest
+};
 use App\DTO\CreateAdData;
 use App\Http\Resources\AdResource;
 use App\Classes\ImageManipulator;
@@ -75,6 +78,23 @@ class AdsController extends Controller
         $findAds = Ad::with('colors')->get();
         return $this->successResponse(
             AdResource::collection($findAds)
+        );
+    }
+
+    public function publish(AdsPublishRequest $request, $id) {
+        $ad = $this->user->ads()
+            ->where('id', $id)
+            ->first();
+
+        if (!$ad) {
+            return $this->errorResponse('Объявление не найдено', 404); 
+        }
+
+        $ad->active = $request->get('active');
+        $ad->save();
+
+        return $this->successResponse(
+            new AdResource($ad)
         );
     }
 }
