@@ -158,7 +158,7 @@ class AdRepository
         }
 
         if ($data->sortBy == 'age') {
-           $query->orderBy('age', 'desc');
+           $query->orderBy('age', 'asc');
         }
 
         return $query->paginate(5, ['*'], 'page', $data->page);

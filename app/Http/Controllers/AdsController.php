@@ -74,9 +74,11 @@ class AdsController extends Controller
             ->repository
             ->find($data);
 
-        return $this->successResponse(
-            AdResource::collection($ads)
-        );
+        return $this->successResponse([
+           'items' => AdResource::collection($ads),
+           'lastPage' => $ads->lastPage(),
+           'currentPage' => $ads->currentPage()
+        ]);
     }
 
     public function publish(AdsPublishRequest $request) {
