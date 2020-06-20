@@ -134,10 +134,10 @@ class AdRepository
         $query->where('age', '>=', $data->ages['from']);
         $query->where('age', '<=', $data->ages['to']);
 
-        if (!$city['parent_id']) {
+        if ($city && !$city['parent_id']) {
             $query->join('cities', 'cities.id', '=', 'city_id');
             $query->where('cities.parent_id', $city['id']);
-        } else {
+        } elseif ($city) {
             $query->where('city_id', $city['id']);
         }
 

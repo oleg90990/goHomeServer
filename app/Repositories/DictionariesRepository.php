@@ -38,9 +38,13 @@ class DictionariesRepository
     {
 
         if (!$q) {
-            return City::where('parent_id', 15)
-                ->OrWhere('id', 15)
-                ->take($count)
+            $qyery = City::where('parent_id', 15);
+
+            if ($includeRegions) {
+                $qyery->OrWhere('id', 15);
+            }
+
+            return $qyery->take($count)
                 ->orderBy('population', 'desc')
                 ->get();
         }

@@ -33,8 +33,7 @@ class FindAdsRequest extends FormRequest
             'ages.from' => 'required|numeric',
             'ages.to' => 'required|numeric',
             'sortBy' => 'required',
-            'page' => 'required|numeric',
-            'city.id' => 'required'
+            'page' => 'required|numeric'
         ];
     }
 }
