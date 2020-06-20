@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('user/login', 'UserController@login');
 Route::post('user/register', 'UserController@register');
 Route::get('dictionaries', 'DictionariesController@view');
+Route::post('dictionaries/city', 'DictionariesController@city');
 Route::post('ads/find', 'AdsController@find');
 
 Route::group(['middleware' => 'auth:api'], function() {

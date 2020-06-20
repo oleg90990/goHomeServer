@@ -12,7 +12,7 @@ class BreedsSeeder extends Seeder
      */
     public function run()
     {
-        Breed::truncate();
+        // Breed::truncate();
 
         $breeds = [
             1 => File::get('database/data/breeds/1.json'),

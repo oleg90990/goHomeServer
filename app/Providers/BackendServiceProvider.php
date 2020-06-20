@@ -10,7 +10,8 @@ class BackendServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Repositories\AdRepository'
+            'App\Repositories\AdRepository',
+            'App\Repositories\DictionariesRepository'
         );
     }
 }

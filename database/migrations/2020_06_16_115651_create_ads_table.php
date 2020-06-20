@@ -16,15 +16,16 @@ class CreateAdsTable extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('animal_id')->references('id')->on('animals');
-            $table->text('content')->nullable();
-            $table->integer('breed_id')->references('id')->on('breeds')->nullable();
+            $table->integer('animal_id')->references('id')->on('animals')->index();
+            $table->text('content')->nullable()->index();
+            $table->integer('breed_id')->references('id')->on('breeds')->nullable()->index();
             $table->string('phone');
             $table->integer('age');
             $table->boolean('active');
             $table->integer('user_id')->references('id')->on('users');
-            $table->string('gender');
-            $table->string('sterilization');
+            $table->string('gender')->index();
+            $table->string('sterilization')->index();
+            $table->integer('city_id')->references('id')->on('cities')->index();
             $table->json('images')->nullable();
             $table->timestamps();
         });

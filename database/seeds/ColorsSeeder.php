@@ -12,7 +12,7 @@ class ColorsSeeder extends Seeder
      */
     public function run()
     {
-        Color::truncate();
+        // Color::truncate();
         
         $animals = [
             [

@@ -14,8 +14,8 @@ class CreateAdColorTable extends Migration
     public function up()
     {
         Schema::create('ad_color', function (Blueprint $table) {
-            $table->unsignedBigInteger('ad_id');
-            $table->unsignedBigInteger('color_id');
+            $table->unsignedBigInteger('ad_id')->index();
+            $table->unsignedBigInteger('color_id')->index();
             // foreign keys
             $table->foreign('ad_id')->references('id')->on('ads');
             $table->foreign('color_id')->references('id')->on('colors');
