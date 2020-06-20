@@ -18,6 +18,7 @@ class FindAdData extends DataTransferObject
     public $gender;
     public $sterilization;
     public $page;
+    public $city;
 
     public static function fromRequest(FindAdsRequest $request): self
     {
@@ -29,7 +30,8 @@ class FindAdData extends DataTransferObject
             'gender' => $request->get('gender', Gender::None),
             'sterilization' => $request->get('sterilization', YesNo::None),
             'sortBy' => $request->get('sortBy'),
-            'page' => $request->get('page', 1)
+            'page' => $request->get('page', 1),
+            'city' => $request->get('city'),
         ]);
     }
 }

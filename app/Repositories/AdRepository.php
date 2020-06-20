@@ -37,6 +37,7 @@ class AdRepository
             'user_id' => $user->id,
             'breed_id' => $data->breed_id,
             'animal_id' => $data->animal_id,
+            'city_id' => $data->city_id,
             'images' => ImageManipulator::saveFromBase64($data->images, $user),
             'active' => true
         ]);
@@ -67,6 +68,7 @@ class AdRepository
         $ad->sterilization = $data->sterilization;
         $ad->breed_id = $data->breed_id;
         $ad->animal_id = $data->animal_id;
+        $ad->city_id = $data->city_id;
         $ad->images = ImageManipulator::saveFromBase64($data->images, $user);
 
         $ad->colors()
@@ -123,6 +125,7 @@ class AdRepository
      */
     public function find(FindAdData $data): LengthAwarePaginator
     {
+        $city = $data->city;
         $colors = $data->colors;
 
         $query = Ad::query();
@@ -130,6 +133,13 @@ class AdRepository
         $query->where('active', 1);
         $query->where('age', '>=', $data->ages['from']);
         $query->where('age', '<=', $data->ages['to']);
+
+        if (!$city['parent_id']) {
+            $query->join('cities', 'cities.id', '=', 'city_id');
+            $query->where('cities.parent_id', $city['id']);
+        } else {
+            $query->where('city_id', $city['id']);
+        }
 
         if ($data->animal) {
             $query->where('animal_id', $data->animal);

@@ -19,6 +19,7 @@ class CreateAdData extends DataTransferObject
     public $breed_id;
     public $animal_id;
     public $images;
+    public $city_id;
 
     public static function fromRequest(AdsRequest $request): self
     {
@@ -32,6 +33,7 @@ class CreateAdData extends DataTransferObject
             'colors' => $request->get('colors', []),
             'breed_id' => $request->get('breed_id', null),
             'animal_id' => $request->get('animal_id'),
+            'city_id' => $request->get('city_id'),
             'images' => $request->get('images', [])
         ]);
     }

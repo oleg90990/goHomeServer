@@ -39,14 +39,15 @@ class UserController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $inputs = $request->only([
+        $data = $request->only([
             'name',
             'email',
-            'password'
+            'password',
+            'city_id'
         ]);
 
-        $user = User::create(array_merge($inputs, [
-            'password' => bcrypt($inputs['password'])
+        $user = User::create(array_merge($data, [
+            'password' => bcrypt($data['password'])
         ]));
 
         return $this->successResponse([
@@ -57,21 +58,21 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request)
     {
-        $inputs = $request->only([
+        $data = $request->only([
             'name',
             'email',
+            'city_id',
             'password'
         ]);
 
-        if (isset($inputs['password']) && $inputs['password']) {
-            $inputs['password'] = bcrypt($inputs['password']);
+        if (isset($data['password']) && $data['password']) {
+            $data['password'] = bcrypt($data['password']);
         } else {
-            unset($inputs['password']);
+            unset($data['password']);
         }
 
-        $request
-            ->user()
-            ->update($inputs);
+        $request->user()
+            ->update($data);
 
         return $this->successResponse(
             new UserProfileResource(auth()->user())

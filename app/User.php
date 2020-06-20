@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'city_id'
     ];
 
     /**
@@ -41,6 +41,11 @@ class User extends Authenticatable
     public function ads()
     {
         return $this->hasMany('App\Ad');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City');
     }
 
     public function createAccessToken(): string

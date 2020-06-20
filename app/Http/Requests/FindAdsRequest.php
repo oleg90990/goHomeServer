@@ -27,13 +27,14 @@ class FindAdsRequest extends FormRequest
     {
 
         return [
-            "animal" => 'numeric',
-            "gender" => 'enum_value:' . Gender::class,
-            "sterilization" => 'enum_value:' . YesNo::class,
-            "ages.from" => 'required|numeric',
-            "ages.to" => 'required|numeric',
-            "sortBy" => 'required',
-            "page" => 'required|numeric',
+            'animal' => 'numeric',
+            'gender' => 'enum_value:' . Gender::class,
+            'sterilization' => 'enum_value:' . YesNo::class,
+            'ages.from' => 'required|numeric',
+            'ages.to' => 'required|numeric',
+            'sortBy' => 'required',
+            'page' => 'required|numeric',
+            'city.id' => 'required'
         ];
     }
 }

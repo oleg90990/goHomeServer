@@ -34,8 +34,8 @@ class DictionariesController extends Controller
             $data->includeRegions
         );
 
-        return $this->successResponse([
+        return $this->successResponse(
              CitiesResource::collection($cities)
-        ]);
+        );
     }
 }

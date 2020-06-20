@@ -17,6 +17,7 @@ class CreateCitiesTable extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('parent_id')->index()->nullable();
+            $table->int('population')->default(0)->index();
         });
     }
 

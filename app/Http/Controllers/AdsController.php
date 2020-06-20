@@ -37,20 +37,19 @@ class AdsController extends Controller
      *
      * @return void
      */
-    public function __construct(AdRepository $repository)
+    public function __construct()
     {
-        $this->middleware(function ($request, $next) use ($repository) {
+        $this->middleware(function ($request, $next) {
             $this->user = auth()->user();
-            $this->repository = $repository;
             return $next($request);
         });
     }
 
-    public function store(AdsRequest $request)
+    public function store(AdsRequest $request, AdRepository $repository)
     {
         $data = CreateAdData::fromRequest($request);
 
-        $ad = $this->repository
+        $ad = $repository
             ->create($data, $this->user);
 
         return $this->successResponse(
@@ -58,8 +57,8 @@ class AdsController extends Controller
         );
     }
 
-    public function me() {
-        $ads = $this->repository
+    public function me(AdRepository $repository) {
+        $ads = $repository
             ->getAllFromUser($this->user);
 
         return $this->successResponse(
@@ -67,11 +66,10 @@ class AdsController extends Controller
         );
     }
 
-    public function find(FindAdsRequest $request) {
+    public function find(FindAdsRequest $request, AdRepository $repository) {
         $data = FindAdData::fromRequest($request);
 
-        $ads = $this
-            ->repository
+        $ads = $repository
             ->find($data);
 
         return $this->successResponse([
@@ -81,11 +79,10 @@ class AdsController extends Controller
         ]);
     }
 
-    public function publish(AdsPublishRequest $request) {
+    public function publish(AdsPublishRequest $request, AdRepository $repository) {
         $id = $request->get('id');
 
-        $ad = $this
-            ->repository
+        $ad = $repository
             ->getByIdFromUser($this->user, $id);
 
         if (!$ad) {
@@ -100,17 +97,17 @@ class AdsController extends Controller
         );
     }
 
-    public function update(AdsUpdateRequest $request) {
+    public function update(AdsUpdateRequest $request, AdRepository $repository) {
         $data = UpdateAdData::fromRequest($request);
 
-        $ad = $this->repository
+        $ad = $repository
             ->getByIdFromUser($this->user, $data->id);
 
         if (!$ad) {
             return $this->errorResponse('Объявление не найдено', 404); 
         }
 
-        $ad = $this->repository
+        $ad = $repository
             ->update($ad, $data, $this->user);
 
         return $this->successResponse(

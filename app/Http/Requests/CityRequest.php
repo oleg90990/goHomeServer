@@ -24,7 +24,6 @@ class CityRequest extends FormRequest
     public function rules()
     {
         return [
-            'q' => 'required',
             'regions' => 'boolean'
         ];
     }

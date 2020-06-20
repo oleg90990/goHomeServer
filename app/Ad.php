@@ -24,12 +24,18 @@ class Ad extends Model
         'user_id',
         'breed_id',
         'animal_id',
-        'active'
+        'active',
+        'city_id'
     ];
 
     protected $casts = [
         'images' => 'array'
     ];
+
+    public function city()
+    {
+        return $this->belongsTo('App\City');
+    }
 
     /**
      * Get the breeds for the animal.

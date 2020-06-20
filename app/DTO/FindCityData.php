@@ -14,7 +14,7 @@ class FindCityData extends DataTransferObject
     public static function fromRequest(CityRequest $request): self
     {
         return new self([
-            'q' => $request->get('q', ''),
+            'q' => $request->get('q') ?? '',
             'includeRegions' => $request->get('regions', false)
         ]);
     }

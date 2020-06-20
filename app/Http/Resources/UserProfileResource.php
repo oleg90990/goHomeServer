@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\CitiesResource;
 
 class UserProfileResource extends JsonResource
 {
@@ -15,9 +16,10 @@ class UserProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "email" => $this->email
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'city' => new CitiesResource($this->city)
         ];
     }
 }

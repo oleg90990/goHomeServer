@@ -34,8 +34,17 @@ class DictionariesRepository
      *
      * @return Ad
      */
-    public function findCities(string $q, bool $includeRegions = true, int $count = 5): Collection
+    public function findCities(string $q, bool $includeRegions = true, int $count = 10): Collection
     {
+
+        if (!$q) {
+            return City::where('parent_id', 15)
+                ->OrWhere('id', 15)
+                ->take($count)
+                ->orderBy('population', 'desc')
+                ->get();
+        }
+
         $query = City::where('name', 'like', "%$q%");
 
         if (!$includeRegions) {
@@ -44,6 +53,7 @@ class DictionariesRepository
 
         return $query
             ->take($count)
+            ->orderBy('population', 'desc')
             ->get();
     }
 }
