@@ -89,7 +89,7 @@ class AdsController extends Controller
             return $this->errorResponse('Объявление не найдено', 404); 
         }
 
-        $this->repository
+        $repository
             ->publish($ad, $request->get('active', false));
 
         return $this->successResponse(
