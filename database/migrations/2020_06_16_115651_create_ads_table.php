@@ -17,7 +17,7 @@ class CreateAdsTable extends Migration
             $table->id();
             $table->string('title');
             $table->integer('animal_id')->references('id')->on('animals')->index();
-            $table->text('content')->nullable()->index();
+            $table->text('content')->nullable();
             $table->integer('breed_id')->references('id')->on('breeds')->nullable()->index();
             $table->string('phone');
             $table->integer('age');
