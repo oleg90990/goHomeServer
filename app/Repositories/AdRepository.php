@@ -128,7 +128,8 @@ class AdRepository
         $city = $data->city;
         $colors = $data->colors;
 
-        $query = Ad::query();
+        $query = Ad::query()
+            ->select('ads.*');
 
         $query->where('active', 1);
         $query->where('age', '>=', $data->ages['from']);
