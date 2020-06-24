@@ -31,4 +31,16 @@ class RegisterRequest extends FormRequest
             'city_id' => 'required|numeric'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'city_id.required' => 'Пожалуйста выберите город проживания',
+        ];
+    }
 }

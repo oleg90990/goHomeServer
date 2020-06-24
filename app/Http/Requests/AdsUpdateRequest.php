@@ -36,4 +36,17 @@ class AdsUpdateRequest extends FormRequest
             "animal_id" => 'required|numeric',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Пожалуйста заполните заголовок',
+            'phone.required' => 'Пожалуйста заполните телефон',
+        ];
+    }
 }
