@@ -12,8 +12,8 @@ class AnimalsSeeder extends Seeder
      */
     public function run()
     {
-        // Animal::truncate();
-        
+        Animal::truncate();
+
         $animals = [
             [
                 'id' => 1,
@@ -27,7 +27,7 @@ class AnimalsSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Собака',
                 'img' => 'animals/dog.png',
-                'male' => 'Кабель',
+                'male' => 'Кобель',
                 'female' => 'Сука',
                 '_none' => 'Не выбрано',
             ]

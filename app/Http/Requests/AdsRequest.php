@@ -36,4 +36,16 @@ class AdsRequest extends FormRequest
             "city_id" => 'required|numeric',
         ];
     }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Пожалуйста заполните заголовок',
+            'phone.required' => 'Пожалуйста заполните телефон',
+        ];
+    }
 }
