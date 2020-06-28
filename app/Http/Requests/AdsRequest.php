@@ -27,8 +27,7 @@ class AdsRequest extends FormRequest
     {
         return [ 
             'title' => 'required|min:3', 
-            'age' => 'required|numeric', 
-            'phone' => 'required|min:6', 
+            'age' => 'required|numeric',
             'gender' => 'required|enum_value:' . Gender::class,
             'sterilization' => 'required|enum_value:' . YesNo::class,
             "breed_id" => 'numeric',

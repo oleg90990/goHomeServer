@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [ 
             'name' => 'required|min:3',
-            'email' => 'required|email|unique:users',
+            'mobile' => 'required|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password',
             'city_id' => 'required|numeric'
@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'city_id.required' => 'Пожалуйста выберите город проживания',
+            'mobile.unique' => 'Пользователь уже существует',
         ];
     }
 }

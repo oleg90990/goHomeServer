@@ -31,7 +31,7 @@ class AdRepository
             'title' => $data->title,
             'content' => $data->content,
             'age' => $data->age,
-            'phone' => $data->phone,
+            'phone' => $user->mobile,
             'gender' => $data->gender,
             'sterilization' => $data->sterilization,
             'user_id' => $user->id,
@@ -63,7 +63,7 @@ class AdRepository
         $ad->title = $data->title;
         $ad->content = $data->content;
         $ad->age = $data->age;
-        $ad->phone = $data->phone;
+        $ad->phone = $user->mobile;
         $ad->gender = $data->gender;
         $ad->sterilization = $data->sterilization;
         $ad->breed_id = $data->breed_id;

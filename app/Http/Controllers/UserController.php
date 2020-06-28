@@ -19,7 +19,7 @@ class UserController extends Controller
     public function login(LoginRequest $request)
     {
         $inputs = $request->only([
-            'email',
+            'mobile',
             'password'
         ]);
 
@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $data = $request->only([
             'name',
-            'email',
+            'mobile',
             'password',
             'city_id'
         ]);

@@ -6,8 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use QiuTuleng\PhoneVerificationCodeGrant\Interfaces\PhoneVerificationCodeGrantUserInterface;
 
-class User extends Authenticatable
+class User extends Authenticatable implements PhoneVerificationCodeGrantUserInterface
 {
     use Notifiable, HasApiTokens;
 
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'city_id'
+        'name', 'email', 'password', 'city_id', 'mobile'
     ];
 
     /**
@@ -52,5 +53,33 @@ class User extends Authenticatable
     {
         return $this->createToken('token')
             ->accessToken;
+    }
+
+    /**
+     * Find or create a user by phone number
+     *
+     * @param $phoneNumber
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function findOrCreateForPassportVerifyCodeGrant($phoneNumber)
+    {
+        // If you need to automatically register the user.
+        // return static::firstOrCreate(['mobile' => $phoneNumber]);
+
+        // If the phone number is not exists in users table, will be fail to authenticate.
+        return static::where('mobile', '=', $phoneNumber)->first();
+    }
+
+    /**
+     * Check the verification code is valid.
+     *
+     * @param $verificationCode
+     * @return boolean
+     */
+    public function validateForPassportVerifyCodeGrant($verificationCode)
+    {
+        // Check verification code is valid.
+        // return \App\Code::where('mobile', $this->mobile)->where('code', '=', $verificationCode)->where('expired_at', '>', now()->toDatetimeString())->exists();
+        return true;
     }
 }
