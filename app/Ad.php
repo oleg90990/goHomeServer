@@ -34,7 +34,7 @@ class Ad extends Model
 
     public function city()
     {
-        return $this->belongsTo('App\City');
+        return $this->belongsTo(City::class);
     }
 
     /**

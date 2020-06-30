@@ -20,7 +20,9 @@ class UserProfileResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'mobile' => $this->mobile,
-            'city' => new CitiesResource($this->city)
+            'city' => new CitiesResource($this->city),
+            'vk' => $this->vk ? true : false,
+            'vkGroups' => $this->getVkGroupsIds()
         ];
     }
 }

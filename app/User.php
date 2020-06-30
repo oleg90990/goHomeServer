@@ -18,7 +18,7 @@ class User extends Authenticatable implements PhoneVerificationCodeGrantUserInte
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'city_id', 'mobile'
+        'name', 'email', 'password', 'city_id', 'mobile', 'vk'
     ];
 
     /**
@@ -37,22 +37,34 @@ class User extends Authenticatable implements PhoneVerificationCodeGrantUserInte
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'vk' => 'array',
     ];
 
     public function ads()
     {
-        return $this->hasMany('App\Ad');
+        return $this->hasMany(Ad::class);
+    }
+
+    public function vkGroups()
+    {
+        return $this->hasMany(VkGroupPivot::class);
     }
 
     public function city()
     {
-        return $this->belongsTo('App\City');
+        return $this->belongsTo(City::class);
     }
 
     public function createAccessToken(): string
     {
         return $this->createToken('token')
             ->accessToken;
+    }
+
+    public function getVkGroupsIds() {
+        return $this->vkGroups->map(function($group) {
+            return $group->group_id;
+        });
     }
 
     /**

@@ -11,7 +11,8 @@ use App\Http\Resources\UserProfileResource;
 use App\Http\Requests\{
     LoginRequest,
     RegisterRequest,
-    UserUpdateRequest
+    UserUpdateRequest,
+    VkSaveRequest
 };
 
 class UserController extends Controller

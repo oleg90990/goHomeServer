@@ -175,7 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\BackendServiceProvider::class,
-        App\Providers\DictionariesServiceProvider::class
+        App\Providers\DictionariesServiceProvider::class,
+        App\Providers\VkSocialProvider::class
 
     ],
 
