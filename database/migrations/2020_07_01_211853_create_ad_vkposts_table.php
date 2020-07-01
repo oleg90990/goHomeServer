@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdPhotoPivotsTable extends Migration
+class CreateAdVkpostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateAdPhotoPivotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ad_photos', function (Blueprint $table) {
+        Schema::create('ad_vkposts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ad_id')->index();
-            $table->string('path');
-            $table->json('vk')->nullable();
+            $table->string('post_id');
+            $table->string('owner_id');
             // foreign keys
             $table->foreign('ad_id')->references('id')->on('ads');
         });
-
-        // Schema::table('ads', function (Blueprint $table) {
-        //     $table->dropColumn('images');
-        // });
     }
 
     /**
@@ -34,6 +30,6 @@ class CreateAdPhotoPivotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ad_photos');
+        Schema::dropIfExists('ad_vkposts');
     }
 }

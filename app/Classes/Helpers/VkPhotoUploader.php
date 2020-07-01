@@ -18,16 +18,24 @@ class VkPhotoUploader
     public static function getAttachments(Ad $ad, VkInfoData $vk): string {
         $photos = $ad->photos->filter(function ($photo) {
             return !$photo->vk;
-        });
+        })->values();
 
-        return self::upload($photos, $vk)
-            ->map(function($photo) {
-                return $photo->getVkId();
-            })
-            ->join(',');
+
+        if ($photos->count() > 0) {
+            $items = self::upload($photos, $vk);
+
+            foreach ($photos as $key => &$photo) {
+                $photo->vk = $items[$key];
+                $photo->save();
+            }
+        }
+
+        return $ad->photos->map(function($photo) {
+            return $photo->getVkId();
+        })->join(',');
     }
 
-    public static function upload($photos, VkInfoData $vk): Collection {
+    public static function upload($photos, VkInfoData $vk): array {
         $server = Vk::request('photos.getWallUploadServer', [
             'group_id' => $vk->user_id,
             'access_token' => $vk->access_token
@@ -42,18 +50,10 @@ class VkPhotoUploader
             return new Collection;
         }
 
-        $items = Vk::request('photos.saveWallPhoto', [
+        return Vk::request('photos.saveWallPhoto', [
             'group_id' => $vk->user_id,
             'access_token' => $vk->access_token
-        ] + $data);
-
-
-        foreach ($photos as $key => &$photo) {
-            $photo->vk = $items[$key];
-            $photo->save();
-        }
-
-        return $photos;  
+        ] + $data); 
     }
 
     public static function request(string $uploadUrl, $photos) {
@@ -64,7 +64,7 @@ class VkPhotoUploader
             $files = $photos->map(function($photo, $key) {
                 return [
                     'name' => "file$key",
-                    'contents' => ImageManipulator::fopen($photo->patch)
+                    'contents' => ImageManipulator::fopen($photo->path)
                 ];
             })->toArray();
 

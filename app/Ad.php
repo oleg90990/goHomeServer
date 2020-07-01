@@ -63,6 +63,11 @@ class Ad extends Model
         return $this->hasMany(AdPhoto::class);
     }
 
+    public function vkPosts()
+    {
+        return $this->hasMany(AdVkpost::class);
+    }
+
     public function getPhotos() {
         return $this->photos;
     }
@@ -75,11 +80,25 @@ class Ad extends Model
     }
 
     public function setPhotos(array $photos) {
-        $patchs = ImageManipulator::saveFromBase64($photos, $this->user);
+        $paths = ImageManipulator::saveFromBase64($photos, $this->user);
 
-        $models = array_map(function($patch) {
-            return ['patch' => $patch];
-        }, $patchs);
+        $this->photos()
+            ->whereNotIn('path', $paths)
+            ->delete();
+
+        $photos = $this->photos()->get();
+
+        foreach ($photos as $photo) {
+            $index = array_search($photo->path, $paths);
+            
+            if ($index !== false) {
+                unset($paths[$index]);
+            }
+        }
+
+        $models = array_map(function($path) {
+            return ['path' => $path];
+        }, $paths);
 
         $this->photos()
             ->createMany($models);

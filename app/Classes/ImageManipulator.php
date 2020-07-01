@@ -44,16 +44,16 @@ class ImageManipulator
         return $results;
     }
 
-    public static function getPublicUri(string $patch) {
-        return asset(self::PublicPath . $patch);
+    public static function getPublicUri(string $path) {
+        return asset(self::PublicPath . $path);
     }
 
-    public static function fullPath(string $patch) {
-        return Storage::disk('public')->path($patch);
+    public static function fullPath(string $path) {
+        return Storage::disk('public')->path($path);
     }
 
-    public static function fopen(string $patch) {
-        return fopen(self::fullPath($patch), 'rb');
+    public static function fopen(string $path) {
+        return fopen(self::fullPath($path), 'rb');
     }
 }
 

@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use App\Enums\Gender;
 use App\Enums\YesNo;
+use App\Enums\Social;
 use App\Classes\SocialProvider;
 use App\DTO\{
     CreateAdData,
@@ -109,10 +110,16 @@ class AdRepository
      * @param bool
      * @return void
      */
-    public function publish(Ad $ad, bool $active): void
+    public function publish(Ad $ad, User $user, bool $active): void
     {
         $ad->active = $active;
         $ad->save();
+
+        if (!$active) {
+            SocialProvider::delete($ad, $user, [Social::Vk]);
+        } else {
+            // SocialProvider::publish($ad, $user, ['vk']);
+        }
     }
 
     /**

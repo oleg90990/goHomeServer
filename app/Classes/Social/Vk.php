@@ -44,22 +44,50 @@ class Vk implements SocialInterface
     public static function publish(Ad $ad, User $user) {
         $vk = $user->getVkInfo();
 
+        $posts = [];
+
         foreach ($user->getVkGroupsIds() as $owner_id) {
-            self::request('wall.post', [
+            $post = self::request('wall.post', [
                 'access_token' => $vk->access_token,
                 'owner_id' => $owner_id,
+                'message' => self::render('social.vk', $ad, $user),
+                'attachments' => VkPhotoUploader::getAttachments($ad, $vk)
+            ]);
+
+            $post['owner_id'] = $owner_id;
+            $posts[] = $post; 
+        }
+
+        $ad->vkPosts()
+           ->createMany($posts);
+    }
+
+    public static function update(Ad $ad, User $user) {
+        $vk = $user->getVkInfo();
+
+        foreach ($ad->vkPosts as $vkPost) {
+            self::request('wall.edit', [
+                'access_token' => $vk->access_token,
+                'post_id' => $vkPost->post_id,
+                'owner_id' => $vkPost->owner_id,
                 'message' => self::render('social.vk', $ad, $user),
                 'attachments' => VkPhotoUploader::getAttachments($ad, $vk)
             ]);
         }
     }
 
-    public static function update(Ad $ad, User $user) {
-        // dd('update');
-    }
-
     public static function delete(Ad $ad, User $user) {
-        // dd('delete');
+        $vk = $user->getVkInfo();
+
+        foreach ($ad->vkPosts as $vkPost) {
+            self::request('wall.delete', [
+                'access_token' => $vk->access_token,
+                'post_id' => $vkPost->post_id,
+                'owner_id' => $vkPost->owner_id
+            ]);
+        }
+
+        $ad->vkPosts()->delete();
     }
 }
 

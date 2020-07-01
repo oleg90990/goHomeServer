@@ -90,7 +90,7 @@ class AdsController extends Controller
         }
 
         $repository
-            ->publish($ad, $request->get('active', false));
+            ->publish($ad, $this->user, $request->get('active', false));
 
         return $this->successResponse(
             new AdResource($ad)

@@ -15,7 +15,7 @@ class AdPhoto extends Model
      * @var array
      */
     protected $fillable = [
-        'patch',
+        'path',
         'vk'
     ];
 
@@ -30,7 +30,7 @@ class AdPhoto extends Model
 
     public function getPublicUrl()
     {
-       return ImageManipulator::getPublicUri($this->patch);
+       return ImageManipulator::getPublicUri($this->path);
     }
 
     public function getVkId() {
