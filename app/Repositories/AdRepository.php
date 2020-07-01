@@ -44,9 +44,8 @@ class AdRepository
 
         $ad->save();
 
-        $ad
-            ->colors()
-            ->sync($data->colors);
+        $ad->colors()
+           ->sync($data->colors);
 
         return $ad;
     }

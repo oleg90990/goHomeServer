@@ -6,11 +6,11 @@ use App\Ad;
 use App\User;
 use Storage;
 use Illuminate\Http\Request;
-use App\Http\Requests\{
-    AdsRequest,
-    AdsPublishRequest,
+use App\Http\Requests\Ads\{
+    AdsCreateRequest,
     AdsUpdateRequest,
-    FindAdsRequest
+    AdsPublishRequest,
+    AdsFindRequest
 };
 use App\DTO\{
     CreateAdData,
@@ -45,7 +45,7 @@ class AdsController extends Controller
         });
     }
 
-    public function store(AdsRequest $request, AdRepository $repository)
+    public function store(AdsCreateRequest $request, AdRepository $repository)
     {
         $data = CreateAdData::fromRequest($request);
 
@@ -66,7 +66,7 @@ class AdsController extends Controller
         );
     }
 
-    public function find(FindAdsRequest $request, AdRepository $repository) {
+    public function find(AdsFindRequest $request, AdRepository $repository) {
         $data = FindAdData::fromRequest($request);
 
         $ads = $repository

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserProfileResource;
-use App\Http\Requests\{
-    VkSaveRequest
-};
 use App\Classes\Vk;
+use App\Http\Resources\UserProfileResource;
+use App\Http\Requests\Social\VkSaveRequest;
 use Illuminate\Http\Request;
 use App\DTO\VkSaveGroupsData;
 
-class SocialController extends Controller
+class VkController extends Controller
 {
 
     public function vkSave(VkSaveRequest $request) {

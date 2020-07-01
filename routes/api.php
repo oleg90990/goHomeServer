@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('ads/publish', 'AdsController@publish');
     Route::post('ads/update', 'AdsController@update');
 
-    Route::post('vk/save', 'SocialController@vkSave');
-    Route::get('vk/groups', 'SocialController@vkGroups');
-    Route::post('vk/groups/store', 'SocialController@vkStore');
+    Route::post('vk/save', 'VkController@vkSave');
+    Route::get('vk/groups', 'VkController@vkGroups');
+    Route::post('vk/groups/store', 'VkController@vkStore');
 });

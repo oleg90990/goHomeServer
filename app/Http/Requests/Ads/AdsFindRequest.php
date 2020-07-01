@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Ads;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\Gender;
 use App\Enums\YesNo;
 
-class FindAdsRequest extends FormRequest
+class AdsFindRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

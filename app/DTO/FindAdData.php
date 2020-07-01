@@ -3,7 +3,7 @@
 namespace App\DTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\FindAdsRequest;
+use App\Http\Requests\Ads\FindAdsRequest;
 use App\Enums\YesNo;
 use App\Enums\Gender;
 

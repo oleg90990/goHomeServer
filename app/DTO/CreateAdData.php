@@ -4,7 +4,7 @@ namespace App\DTO;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\AdsRequest;
+use App\Http\Requests\Ads\AdsCreateRequest;
 use App\Enums\YesNo;
 
 class CreateAdData extends DataTransferObject
@@ -20,8 +20,9 @@ class CreateAdData extends DataTransferObject
     public $animal_id;
     public $images;
     public $city_id;
+    public $socials;
 
-    public static function fromRequest(AdsRequest $request): self
+    public static function fromRequest(AdsCreateRequest $request): self
     {
         return new self([
             'title' => $request->get('title'),
@@ -34,7 +35,8 @@ class CreateAdData extends DataTransferObject
             'breed_id' => $request->get('breed_id', null),
             'animal_id' => $request->get('animal_id'),
             'city_id' => $request->get('city_id'),
-            'images' => $request->get('images', [])
+            'images' => $request->get('images', []),
+            'socials' => $request->get('socials', [])
         ]);
     }
 }

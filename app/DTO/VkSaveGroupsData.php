@@ -16,7 +16,7 @@ class VkSaveGroupsData extends DataTransferObject
         }, $request->all());
 
         return new self([
-            'groups' => array_slice($groups, 0, 5, true)
+            'groups' => $groups
         ]);
     }
 }

@@ -35,9 +35,10 @@ class AdResource extends JsonResource
             'id' => $this->id,
             'city' => new CitiesResource($this->city),
             'city_id' => $this->city_id,
-            'colors' => $this->colors()->get()->map(function($color) {
-                return $color->id;
-            })
+            'colors' => $this->colors()->get()
+                ->map(function($color) {
+                    return $color->id;
+                })
         ];
     }
 }

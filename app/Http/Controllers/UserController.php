@@ -8,16 +8,17 @@ use Illuminate\Http\Request;
 use Laravel\Passport\Client as OClient; 
 use Carbon\Carbon;
 use App\Http\Resources\UserProfileResource;
-use App\Http\Requests\{
-    LoginRequest,
-    RegisterRequest,
-    UserUpdateRequest,
-    VkSaveRequest
+use App\Http\Requests\Social\VkSaveRequest;
+use App\Http\Requests\User\{
+    UserLoginRequest,
+    UserRegisterRequest,
+    UserUpdateRequest
 };
+
 
 class UserController extends Controller
 {
-    public function login(LoginRequest $request)
+    public function login(UserLoginRequest $request)
     {
         $inputs = $request->only([
             'mobile',
@@ -38,7 +39,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function register(RegisterRequest $request)
+    public function register(UserRegisterRequest $request)
     {
         $data = $request->only([
             'name',

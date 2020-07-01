@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Ads;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\Gender;
 use App\Enums\YesNo;
+use App\Enums\Social;
 
-class AdsRequest extends FormRequest
+class AdsCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,6 +34,7 @@ class AdsRequest extends FormRequest
             "breed_id" => 'numeric',
             "animal_id" => 'required|numeric',
             "city_id" => 'required|numeric',
+            'socials.*' => 'enum_value:' . Social::class
         ];
     }
     /**

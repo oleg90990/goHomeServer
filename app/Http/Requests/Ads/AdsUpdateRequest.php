@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Ads;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\Gender;
 use App\Enums\YesNo;
+use App\Enums\Social;
 
 class AdsUpdateRequest extends FormRequest
 {
@@ -31,8 +32,9 @@ class AdsUpdateRequest extends FormRequest
             'age' => 'required|numeric',
             'gender' => 'required|enum_value:' . Gender::class,
             'sterilization' => 'required|enum_value:' . YesNo::class,
-            "breed_id" => 'required|numeric',
-            "animal_id" => 'required|numeric',
+            'breed_id' => 'required|numeric',
+            'animal_id' => 'required|numeric',
+            'socials.*' => 'enum_value:' . Social::class,
         ];
     }
 
