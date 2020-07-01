@@ -3,7 +3,7 @@
 namespace App\DTO;
 
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\Ads\FindAdsRequest;
+use App\Http\Requests\Ads\AdsFindRequest;
 use App\Enums\YesNo;
 use App\Enums\Gender;
 
@@ -20,7 +20,7 @@ class FindAdData extends DataTransferObject
     public $page;
     public $city;
 
-    public static function fromRequest(FindAdsRequest $request): self
+    public static function fromRequest(AdsFindRequest $request): self
     {
         return new self([
             'ages' => $request->get('ages'),

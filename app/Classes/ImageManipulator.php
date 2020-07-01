@@ -12,9 +12,6 @@ class ImageManipulator
 
     const PublicPath = '/storage/';
 
-    /**
-     * Get the breeds for the animal.
-     */
     public static function saveForUser(int $userId, string $image)
     {
         $name = "photos/$userId/" . uniqid() . ".jpeg";
@@ -27,9 +24,6 @@ class ImageManipulator
         return $img->getImageAsString();
     }
 
-    /**
-     * Get the breeds for the animal.
-     */
     public static function saveFromBase64(array $images, User $user)
     {
         $results = [];
@@ -50,11 +44,16 @@ class ImageManipulator
         return $results;
     }
 
-    /**
-     * Get the breeds for the animal.
-     */
     public static function getPublicUri(string $patch) {
         return asset(self::PublicPath . $patch);
+    }
+
+    public static function fullPath(string $patch) {
+        return Storage::disk('public')->path($patch);
+    }
+
+    public static function fopen(string $patch) {
+        return fopen(self::fullPath($patch), 'rb');
     }
 }
 

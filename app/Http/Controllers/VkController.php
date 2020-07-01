@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Vk;
+use App\Classes\Social\Vk;
 use App\Http\Resources\UserProfileResource;
 use App\Http\Requests\Social\VkSaveRequest;
 use Illuminate\Http\Request;
@@ -32,10 +32,16 @@ class VkController extends Controller
     }
 
     public function vkGroups(Request $request, Vk $vkProvider) {
-        $user = $request->user();
+        $vk = $request
+            ->user()
+            ->getVkInfo();
+
+        if (!$vk) {
+            return $this->successResponse([]);
+        }
 
         return $this->successResponse(
-            $vkProvider->getGroups($user)
+            $vkProvider->getGroups($vk)
         );
     }
 

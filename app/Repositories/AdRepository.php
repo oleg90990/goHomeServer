@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Classes\ImageManipulator;
 use App\Enums\Gender;
 use App\Enums\YesNo;
+use App\Classes\SocialProvider;
 use App\DTO\{
     CreateAdData,
     UpdateAdData,
@@ -47,6 +48,8 @@ class AdRepository
         $ad->colors()
            ->sync($data->colors);
 
+        SocialProvider::publish($ad, $user, $data->socials);
+
         return $ad;
     }
 
@@ -74,6 +77,8 @@ class AdRepository
            ->sync($data->colors);
 
         $ad->save();
+
+        SocialProvider::update($ad, $user, $data->socials);
 
         return $ad;
     }

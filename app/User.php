@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use QiuTuleng\PhoneVerificationCodeGrant\Interfaces\PhoneVerificationCodeGrantUserInterface;
+use App\DTO\VkInfoData;
 
 class User extends Authenticatable implements PhoneVerificationCodeGrantUserInterface
 {
@@ -65,6 +66,10 @@ class User extends Authenticatable implements PhoneVerificationCodeGrantUserInte
         return $this->vkGroups->map(function($group) {
             return $group->group_id;
         });
+    }
+
+    public function getVkInfo() {
+        return $this->vk ? new VkInfoData($this->vk) : false;
     }
 
     /**

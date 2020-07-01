@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Classes\Vk;
+use App\Classes\Social\Vk;
 
 class VkSocialProvider extends ServiceProvider
 {

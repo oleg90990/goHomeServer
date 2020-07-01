@@ -38,7 +38,7 @@ class UpdateAdData extends DataTransferObject
             'animal_id' => $request->get('animal_id'),
             'images' => $request->get('images', []),
             'city_id' => $request->get('city_id'),
-            'socials' => $request->get('socials')
+            'socials' => $request->get('socials', [])
         ]);
     }
 }
