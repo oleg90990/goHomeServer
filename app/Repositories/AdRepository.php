@@ -6,7 +6,6 @@ use App\User;
 use Exeption;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
-use App\Classes\ImageManipulator;
 use App\Enums\Gender;
 use App\Enums\YesNo;
 use App\Classes\SocialProvider;
@@ -28,25 +27,24 @@ class AdRepository
      */
     public function create(CreateAdData $data, User $user): Ad
     {
-        $ad = new Ad([
-            'title' => $data->title,
-            'content' => $data->content,
-            'age' => $data->age,
-            'phone' => $user->mobile,
-            'gender' => $data->gender,
-            'sterilization' => $data->sterilization,
-            'user_id' => $user->id,
-            'breed_id' => $data->breed_id,
-            'animal_id' => $data->animal_id,
-            'city_id' => $data->city_id,
-            'images' => ImageManipulator::saveFromBase64($data->images, $user),
-            'active' => true
-        ]);
 
-        $ad->save();
+        $ad = $user->ads()
+            ->create([
+                'title' => $data->title,
+                'content' => $data->content,
+                'age' => $data->age,
+                'phone' => $user->mobile,
+                'gender' => $data->gender,
+                'sterilization' => $data->sterilization,
+                'user_id' => $user->id,
+                'breed_id' => $data->breed_id,
+                'animal_id' => $data->animal_id,
+                'city_id' => $data->city_id,
+                'active' => true
+            ]);
 
-        $ad->colors()
-           ->sync($data->colors);
+        $ad->setPhotos($data->images);
+        $ad->setColors($data->colors);
 
         SocialProvider::publish($ad, $user, $data->socials);
 
@@ -71,12 +69,9 @@ class AdRepository
         $ad->breed_id = $data->breed_id;
         $ad->animal_id = $data->animal_id;
         $ad->city_id = $data->city_id;
-        $ad->images = ImageManipulator::saveFromBase64($data->images, $user);
 
-        $ad->colors()
-           ->sync($data->colors);
-
-        $ad->save();
+        $ad->setPhotos($data->images);
+        $ad->setColors($data->colors);
 
         SocialProvider::update($ad, $user, $data->socials);
 

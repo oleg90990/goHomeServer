@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Classes\ImageManipulator;
 
 class Ad extends Model
 {
@@ -37,27 +38,60 @@ class Ad extends Model
         return $this->belongsTo(City::class);
     }
 
-    /**
-     * Get the breeds for the animal.
-     */
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function animal()
     {
-        return $this->hasOne('App\Animal');
+        return $this->belongsTo(Animal::class);
     }
 
     public function breed()
     {
-        return $this->hasOne('App\Breed');
+        return $this->belongsTo(Breed::class);
     }
-
 
     public function colors()
     {
-        return $this->belongsToMany('App\Color');
+        return $this->belongsToMany(Color::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(AdPhoto::class);
+    }
+
+    public function getPhotos() {
+        return $this->photos;
+    }
+
+    public function getColorsIds() {
+        return $this->colors()->get()
+            ->map(function($color) {
+                return $color->id;
+            });
+    }
+
+    public function setPhotos(array $photos) {
+        $patchs = ImageManipulator::saveFromBase64($photos, $this->user);
+
+        $models = array_map(function($patch) {
+            return ['patch' => $patch];
+        }, $patchs);
+
+        $this->photos()
+            ->createMany($models);
+    }
+
+    public function getPublicUrlPhotos() {
+        return $this->photos->map(function($photo){
+            return $photo->getPublicUrl();
+        });
+    }
+
+    public function setColors(array $colors) {
+        $this->colors()->sync($colors);
     }
 }

@@ -26,19 +26,14 @@ class AdResource extends JsonResource
             'user_id' => $this->user_id,
             'breed_id' => $this->breed_id,
             'animal_id' => $this->animal_id,
-            'images' => array_map(function($url) {
-                return ImageManipulator::getPublicUri($url);
-            }, $this->images),
+            'images' => $this->getPublicUrlPhotos(),
             'active' => $this->active,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
             'id' => $this->id,
             'city' => new CitiesResource($this->city),
             'city_id' => $this->city_id,
-            'colors' => $this->colors()->get()
-                ->map(function($color) {
-                    return $color->id;
-                })
+            'colors' => $this->getColorsIds()
         ];
     }
 }
