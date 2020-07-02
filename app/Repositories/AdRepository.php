@@ -68,6 +68,7 @@ class AdRepository
         $ad->breed_id = $data->breed_id;
         $ad->animal_id = $data->animal_id;
         $ad->city_id = $data->city_id;
+        $ad->save();
 
         $ad->setPhotos($data->images);
         $ad->setColors($data->colors);
