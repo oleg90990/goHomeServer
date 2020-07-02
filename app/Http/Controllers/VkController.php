@@ -10,6 +10,23 @@ use App\DTO\VkSaveGroupsData;
 
 class VkController extends Controller
 {
+    /**
+     * All of the current user's projects.
+     */
+    protected $user;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = auth()->user();
+            return $next($request);
+        });
+    }
 
     public function vkSave(VkSaveRequest $request) {
         $data = $request->only([
@@ -21,20 +38,17 @@ class VkController extends Controller
             'secret'
         ]);
 
-        $request->user()
-            ->update([
-                'vk' => $data
-            ]);
+        $this->user->update([
+            'vk' => $data
+        ]);
 
         return $this->successResponse(
-            new UserProfileResource(auth()->user())
+            new UserProfileResource($this->user)
         );
     }
 
     public function vkGroups(Request $request, Vk $vkProvider) {
-        $vk = $request
-            ->user()
-            ->getVkInfo();
+        $vk = $this->user->getVkInfo();
 
         if (!$vk) {
             return $this->successResponse([]);
@@ -48,16 +62,14 @@ class VkController extends Controller
     public function vkStore(Request $request) {
         $data = VkSaveGroupsData::fromRequest($request);
 
-        $user = $request->user();
-
-        $user->vkGroups()
+        $this->user->vkGroups()
             ->delete();
 
-         $user->vkGroups()
+        $this->user->vkGroups()
             ->createMany($data->groups);
 
         return $this->successResponse(
-            new UserProfileResource(auth()->user())
+            new UserProfileResource($this->user)
         );
     }
 }

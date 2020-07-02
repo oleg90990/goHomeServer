@@ -48,7 +48,7 @@ class User extends Authenticatable implements PhoneVerificationCodeGrantUserInte
 
     public function vkGroups()
     {
-        return $this->hasMany(VkGroupPivot::class);
+        return $this->hasMany(VkGroup::class);
     }
 
     public function city()

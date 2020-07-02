@@ -20,7 +20,7 @@ class AdResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'age' => $this->age,
-            'phone' => $this->phone, 
+            'phone' => $this->user->mobile, 
             'gender' => $this->gender,
             'sterilization' => $this->sterilization,
             'user_id' => $this->user_id,
@@ -33,7 +33,10 @@ class AdResource extends JsonResource
             'id' => $this->id,
             'city' => new CitiesResource($this->city),
             'city_id' => $this->city_id,
-            'colors' => $this->getColorsIds()
+            'colors' => $this->getColorsIds(),
+            'vkPosts' => $this->vkPosts->map(function($post) {
+                return $post->id;
+            })
         ];
     }
 }

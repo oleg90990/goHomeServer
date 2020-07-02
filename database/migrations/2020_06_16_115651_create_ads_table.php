@@ -19,14 +19,12 @@ class CreateAdsTable extends Migration
             $table->integer('animal_id')->references('id')->on('animals')->index();
             $table->text('content')->nullable();
             $table->integer('breed_id')->references('id')->on('breeds')->nullable()->index();
-            $table->string('phone');
             $table->integer('age');
             $table->boolean('active');
             $table->integer('user_id')->references('id')->on('users');
             $table->string('gender')->index();
             $table->string('sterilization')->index();
             $table->integer('city_id')->references('id')->on('cities')->index();
-            $table->json('images')->nullable();
             $table->timestamps();
         });
     }

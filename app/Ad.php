@@ -15,11 +15,9 @@ class Ad extends Model
      */
     protected $fillable = [
         'title',
-        'images',
         'content',
         'age',
         'colors',
-        'phone',
         'gender',
         'sterilization',
         'user_id',
@@ -27,10 +25,6 @@ class Ad extends Model
         'animal_id',
         'active',
         'city_id'
-    ];
-
-    protected $casts = [
-        'images' => 'array'
     ];
 
     public function city()

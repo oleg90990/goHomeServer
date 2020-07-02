@@ -28,11 +28,6 @@ class AdsController extends Controller
     protected $user;
 
     /**
-     * The repository for Ad model
-     */
-    protected $repository;
-
-    /**
      * Create a new controller instance.
      *
      * @return void

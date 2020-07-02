@@ -12,7 +12,6 @@ class CreateAdData extends DataTransferObject
     public $title;
     public $content;
     public $age;
-    public $phone;
     public $gender;
     public $sterilization;
     public $colors;
@@ -28,7 +27,6 @@ class CreateAdData extends DataTransferObject
             'title' => $request->get('title'),
             'content' => $request->get('content'),
             'age' => $request->get('age'),
-            'phone' => $request->get('phone'),
             'gender' => $request->get('gender'),
             'sterilization' => $request->get('sterilization', YesNo::None),
             'colors' => $request->get('colors', []),

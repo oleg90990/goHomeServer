@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VkGroupPivot extends Model
+class VkGroup extends Model
 {
 
     public $timestamps = false;

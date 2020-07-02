@@ -46,8 +46,7 @@ class AdsUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Пожалуйста заполните заголовок',
-            'phone.required' => 'Пожалуйста заполните телефон',
+            'title.required' => 'Пожалуйста заполните заголовок'
         ];
     }
 }

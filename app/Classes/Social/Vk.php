@@ -8,6 +8,7 @@ use App\User;
 use ATehnix\VkClient\Client;
 use App\DTO\VkInfoData;
 use App\Classes\Helpers\VkPhotoUploader;
+use ATehnix\VkClient\Exceptions\InternalErrorVkException;
 
 class Vk implements SocialInterface
 {
@@ -47,15 +48,21 @@ class Vk implements SocialInterface
         $posts = [];
 
         foreach ($user->getVkGroupsIds() as $owner_id) {
-            $post = self::request('wall.post', [
-                'access_token' => $vk->access_token,
-                'owner_id' => $owner_id,
-                'message' => self::render('social.vk', $ad, $user),
-                'attachments' => VkPhotoUploader::getAttachments($ad, $vk)
-            ]);
+            try {
+                $post = self::request('wall.post', [
+                    'access_token' => $vk->access_token,
+                    'owner_id' => $owner_id,
+                    'message' => self::render('social.vk', $ad, $user),
+                    'attachments' => VkPhotoUploader::getAttachments($ad, $vk)
+                ]);
 
-            $post['owner_id'] = $owner_id;
-            $posts[] = $post; 
+                $posts[] = [
+                    'owner_id' => $owner_id,
+                    'post_id' => $post['post_id']
+                ];
+            } catch (Exception $e) {
+                \Log::error($e);
+            }
         }
 
         $ad->vkPosts()
@@ -66,13 +73,17 @@ class Vk implements SocialInterface
         $vk = $user->getVkInfo();
 
         foreach ($ad->vkPosts as $vkPost) {
-            self::request('wall.edit', [
-                'access_token' => $vk->access_token,
-                'post_id' => $vkPost->post_id,
-                'owner_id' => $vkPost->owner_id,
-                'message' => self::render('social.vk', $ad, $user),
-                'attachments' => VkPhotoUploader::getAttachments($ad, $vk)
-            ]);
+            try {
+                self::request('wall.edit', [
+                    'access_token' => $vk->access_token,
+                    'post_id' => $vkPost->post_id,
+                    'owner_id' => $vkPost->owner_id,
+                    'message' => self::render('social.vk', $ad, $user),
+                    'attachments' => VkPhotoUploader::getAttachments($ad, $vk)
+                ]);
+            } catch (InternalErrorVkException $e) {
+                \Log::error($e);
+            }
         }
     }
 
@@ -80,14 +91,20 @@ class Vk implements SocialInterface
         $vk = $user->getVkInfo();
 
         foreach ($ad->vkPosts as $vkPost) {
-            self::request('wall.delete', [
-                'access_token' => $vk->access_token,
-                'post_id' => $vkPost->post_id,
-                'owner_id' => $vkPost->owner_id
-            ]);
+            try {
+                self::request('wall.delete', [
+                    'access_token' => $vk->access_token,
+                    'post_id' => $vkPost->post_id,
+                    'owner_id' => $vkPost->owner_id
+                ]);
+            } catch (InternalErrorVkException $e) {
+                \Log::error($e);
+            }
         }
 
-        $ad->vkPosts()->delete();
+        $ad
+            ->vkPosts()
+            ->delete();
     }
 }
 

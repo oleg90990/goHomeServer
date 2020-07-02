@@ -13,7 +13,7 @@ class CreateVkGroupPivotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vk_group_pivots', function (Blueprint $table) {
+        Schema::create('vk_groups', function (Blueprint $table) {
             $table->integer('user_id')->index();
             $table->string('group_id')->index();
         });
@@ -26,6 +26,6 @@ class CreateVkGroupPivotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vk_group_pivots');
+        Schema::dropIfExists('vk_groups');
     }
 }
