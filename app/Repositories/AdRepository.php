@@ -86,7 +86,10 @@ class AdRepository
      */
     public function getAllFromUser(User $user): Collection
     {
-        return $user->ads()->get();
+        return $user
+            ->ads()
+            ->with('user', 'photos', 'vkPosts')
+            ->get();
     }
 
 
