@@ -9,6 +9,7 @@ use ATehnix\VkClient\Client;
 use App\DTO\VkInfoData;
 use App\Classes\Helpers\VkPhotoUploader;
 use ATehnix\VkClient\Exceptions\InternalErrorVkException;
+use ATehnix\VkClient\Exceptions\AccessDeniedVkException;
 
 class Vk implements SocialInterface
 {
@@ -62,6 +63,8 @@ class Vk implements SocialInterface
                 ];
             } catch (Exception $e) {
                 \Log::error($e);
+            } catch (AccessDeniedVkException $e) {
+                \Log::error($e);
             }
         }
 
@@ -83,6 +86,8 @@ class Vk implements SocialInterface
                 ]);
             } catch (InternalErrorVkException $e) {
                 \Log::error($e);
+            } catch (AccessDeniedVkException $e) {
+                \Log::error($e);
             }
         }
     }
@@ -98,6 +103,8 @@ class Vk implements SocialInterface
                     'owner_id' => $vkPost->owner_id
                 ]);
             } catch (InternalErrorVkException $e) {
+                \Log::error($e);
+            } catch (AccessDeniedVkException $e) {
                 \Log::error($e);
             }
         }
