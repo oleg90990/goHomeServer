@@ -73,7 +73,7 @@ class AdRepository
         $ad->setPhotos($data->images);
         $ad->setColors($data->colors);
 
-        SocialProvider::update($ad, $user, $data->socials);
+        SocialProvider::update($ad, $user, [Social::Vk]);
 
         return $ad;
     }
@@ -88,7 +88,7 @@ class AdRepository
     {
         return $user
             ->ads()
-            ->with('user', 'photos', 'vkPosts')
+            ->with('user', 'photos')
             ->get();
     }
 
@@ -137,7 +137,7 @@ class AdRepository
         $colors = $data->colors;
 
         $query = Ad::query()
-            ->with('user', 'photos', 'vkPosts')
+            ->with('user', 'photos')
             ->select('ads.*');
 
         $query->where('active', 1);

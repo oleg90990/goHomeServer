@@ -20,7 +20,6 @@ class UpdateAdData extends DataTransferObject
     public $animal_id;
     public $images;
     public $city_id;
-    public $socials;
 
     public static function fromRequest(AdsUpdateRequest $request): self
     {
@@ -35,8 +34,7 @@ class UpdateAdData extends DataTransferObject
             'breed_id' => $request->get('breed_id', null),
             'animal_id' => $request->get('animal_id'),
             'images' => $request->get('images', []),
-            'city_id' => $request->get('city_id'),
-            'socials' => $request->get('socials', [])
+            'city_id' => $request->get('city_id')
         ]);
     }
 }

@@ -33,8 +33,7 @@ class AdsUpdateRequest extends FormRequest
             'gender' => 'required|enum_value:' . Gender::class,
             'sterilization' => 'required|enum_value:' . YesNo::class,
             'breed_id' => 'required|numeric',
-            'animal_id' => 'required|numeric',
-            'socials.*' => 'enum_value:' . Social::class,
+            'animal_id' => 'required|numeric'
         ];
     }
 
