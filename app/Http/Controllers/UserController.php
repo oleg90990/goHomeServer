@@ -60,7 +60,7 @@ class UserController extends Controller
 
         try {
             $user = $repository->update($data, $request->user());
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->errorResponse(
                 $e->getMessage(), 403
             ); 
