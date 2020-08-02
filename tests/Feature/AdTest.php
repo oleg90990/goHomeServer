@@ -10,6 +10,24 @@ use App\User;
 
 class AdTest extends TestCase
 {
+
+    /**
+     * create user
+     *
+     * @return void
+     */
+    public function getUser()
+    {
+        User::truncate();
+
+        return User::create([
+            'password' => '12345',
+            'name' => 'name',
+            'mobile' => 'mobile',
+            'city_id' => 15,
+        ]);
+    }
+
     /**
      * A create ad test
      *
@@ -21,7 +39,7 @@ class AdTest extends TestCase
         Ad::truncate();
         \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $user = User::find(1);
+        $user = $this->getUser();
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $user->createAccessToken(),
@@ -51,10 +69,10 @@ class AdTest extends TestCase
             ->assertJsonPath("id", 1)
             ->assertJsonPath("content", "Content")
             ->assertJsonPath("age", 1)
-            ->assertJsonPath("phone", "79999999999")
+            ->assertJsonPath("phone", $user->mobile)
             ->assertJsonPath("gender", "_none")
             ->assertJsonPath("sterilization", "_none")
-            ->assertJsonPath("user_id", 1)
+            ->assertJsonPath("user_id", $user->id)
             ->assertJsonPath("breed_id", 1)
             ->assertJsonPath("animal_id", 1)
             ->assertJsonPath("images", [
@@ -70,7 +88,7 @@ class AdTest extends TestCase
      */
     public function testUpdate()
     {
-        $user = User::find(1);
+        $user = $this->getUser();
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $user->createAccessToken(),
@@ -99,10 +117,10 @@ class AdTest extends TestCase
             ->assertJsonPath("id", 1)
             ->assertJsonPath("content", 'Content 2')
             ->assertJsonPath("age", 5)
-            ->assertJsonPath("phone", "79999999999")
+            ->assertJsonPath("phone", $user->mobile)
             ->assertJsonPath("gender", "male")
             ->assertJsonPath("sterilization", "1")
-            ->assertJsonPath("user_id", 1)
+            ->assertJsonPath("user_id", $user->id)
             ->assertJsonPath("breed_id", 5)
             ->assertJsonPath("animal_id", 1)
             ->assertJsonPath("images", [
@@ -117,7 +135,7 @@ class AdTest extends TestCase
      */
     public function testMe()
     {
-        $user = User::find(1);
+        $user = $this->getUser();
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $user->createAccessToken(),
@@ -132,10 +150,10 @@ class AdTest extends TestCase
                 "id" => 1,
                 "content" => 'Content 2',
                 "age" => 5,
-                "phone" => "79999999999",
+                "phone" => $user->mobile,
                 "gender" => "male",
                 "sterilization" => "1",
-                "user_id" => 1,
+                "user_id" => $user->id,
                 "breed_id" => 5,
                 "animal_id" => 1,
                 "images" => [

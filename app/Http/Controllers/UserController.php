@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Laravel\Passport\Client as OClient; 
-use Carbon\Carbon;
+use App\Repositories\UserRepository;
 use App\Http\Resources\UserProfileResource;
-use App\Http\Requests\Social\VkSaveRequest;
+use App\DTO\User\{
+    UserLoginData,
+    UserRegisterData,
+    UserUpdateData
+};
 use App\Http\Requests\User\{
     UserLoginRequest,
     UserRegisterRequest,
@@ -18,20 +18,17 @@ use App\Http\Requests\User\{
 
 class UserController extends Controller
 {
-    public function login(UserLoginRequest $request)
+    public function login(UserLoginRequest $request, UserRepository $repository)
     {
-        $inputs = $request->only([
-            'mobile',
-            'password'
-        ]);
+        $data = UserLoginData::fromRequest($request);
 
-        $auth = Auth::attempt($inputs);
-
-        if (!$auth) { 
-            return $this->errorResponse('Пользователь не найден', 403); 
+        try {
+            $user = $repository->login($data);
+        } catch (\Exception $e) {
+            return $this->errorResponse(
+                $e->getMessage(), 403
+            ); 
         }
-
-        $user = auth()->user();
 
         return $this->successResponse([
             'access_token' => $user->createAccessToken(),
@@ -39,18 +36,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function register(UserRegisterRequest $request)
+    public function register(UserRegisterRequest $request, UserRepository $repository)
     {
-        $data = $request->only([
-            'name',
-            'mobile',
-            'password',
-            'city_id'
-        ]);
+        $data = UserRegisterData::fromRequest($request);
 
-        $user = User::create(array_merge($data, [
-            'password' => bcrypt($data['password'])
-        ]));
+        try {
+            $user = $repository->register($data);
+        } catch (\Exception $e) {
+            return $this->errorResponse(
+                $e->getMessage(), 403
+            ); 
+        }
 
         return $this->successResponse([
             'access_token' => $user->createAccessToken(),
@@ -58,32 +54,26 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserUpdateRequest $request)
+    public function update(UserUpdateRequest $request, UserRepository $repository)
     {
-        $data = $request->only([
-            'name',
-            'email',
-            'city_id',
-            'password'
-        ]);
+        $data = UserUpdateData::fromRequest($request);
 
-        if (isset($data['password']) && $data['password']) {
-            $data['password'] = bcrypt($data['password']);
-        } else {
-            unset($data['password']);
+        try {
+            $user = $repository->update($data, $request->user());
+        } catch (Exception $e) {
+            return $this->errorResponse(
+                $e->getMessage(), 403
+            ); 
         }
-
-        $request->user()
-            ->update($data);
 
         return $this->successResponse(
-            new UserProfileResource(auth()->user())
+            new UserProfileResource($user)
         );
     }
 
-    public function me() {
+    public function me(UserRepository $repository) {
         return $this->successResponse(
-            new UserProfileResource(auth()->user())
+            new UserProfileResource($repository->current())
         );
     }
 }
