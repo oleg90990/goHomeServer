@@ -6,7 +6,7 @@ use View;
 use App\Ad;
 use App\User;
 use ATehnix\VkClient\Client;
-use App\DTO\VkInfoData;
+use App\DTO\Vk\VkInfoData;
 use App\Classes\Helpers\VkPhotoUploader;
 use ATehnix\VkClient\Exceptions\InternalErrorVkException;
 use ATehnix\VkClient\Exceptions\AccessDeniedVkException;

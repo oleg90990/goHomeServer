@@ -6,7 +6,7 @@ use App\Classes\Social\Vk;
 use App\Http\Resources\UserProfileResource;
 use App\Http\Requests\Social\VkSaveRequest;
 use Illuminate\Http\Request;
-use App\DTO\VkSaveGroupsData;
+use App\DTO\Vk\VkSaveGroupsData;
 
 class VkController extends Controller
 {

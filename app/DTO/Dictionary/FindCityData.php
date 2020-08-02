@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Dictionary;
 
 use Spatie\DataTransferObject\DataTransferObject;
 use App\Http\Requests\CityRequest;

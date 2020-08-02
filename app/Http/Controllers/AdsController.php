@@ -12,7 +12,7 @@ use App\Http\Requests\Ads\{
     AdsPublishRequest,
     AdsFindRequest
 };
-use App\DTO\{
+use App\DTO\Ad\{
     CreateAdData,
     UpdateAdData,
     FindAdData

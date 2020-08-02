@@ -3,7 +3,7 @@
 namespace App\Classes\Helpers;
 
 use App\Ad;
-use App\DTO\VkInfoData;
+use App\DTO\Vk\VkInfoData;
 use App\Classes\Social\Vk;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;

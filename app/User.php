@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use QiuTuleng\PhoneVerificationCodeGrant\Interfaces\PhoneVerificationCodeGrantUserInterface;
-use App\DTO\VkInfoData;
+use App\DTO\Vk\VkInfoData;
 
 class User extends Authenticatable implements PhoneVerificationCodeGrantUserInterface
 {

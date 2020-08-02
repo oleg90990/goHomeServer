@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Vk;
 
 use Spatie\DataTransferObject\DataTransferObject;
 use Illuminate\Http\Request;

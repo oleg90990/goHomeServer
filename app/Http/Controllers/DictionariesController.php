@@ -9,7 +9,7 @@ use App\Http\Resources\{
     DictionaryResource,
     CitiesResource
 };
-use App\DTO\FindCityData;
+use App\DTO\Dictionary\FindCityData;
 use App\Http\Requests\{
     CityRequest
 };

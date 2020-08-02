@@ -1,14 +1,15 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Ad;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\DataTransferObject\DataTransferObject;
-use App\Http\Requests\Ads\AdsCreateRequest;
+use App\Http\Requests\Ads\AdsUpdateRequest;
 use App\Enums\YesNo;
 
-class CreateAdData extends DataTransferObject
+class UpdateAdData extends DataTransferObject
 {
+    public $id;
     public $title;
     public $content;
     public $age;
@@ -19,11 +20,11 @@ class CreateAdData extends DataTransferObject
     public $animal_id;
     public $images;
     public $city_id;
-    public $socials;
 
-    public static function fromRequest(AdsCreateRequest $request): self
+    public static function fromRequest(AdsUpdateRequest $request): self
     {
         return new self([
+            'id' => $request->get('id'),
             'title' => $request->get('title'),
             'content' => $request->get('content'),
             'age' => $request->get('age'),
@@ -32,9 +33,8 @@ class CreateAdData extends DataTransferObject
             'colors' => $request->get('colors', []),
             'breed_id' => $request->get('breed_id', null),
             'animal_id' => $request->get('animal_id'),
-            'city_id' => $request->get('city_id'),
             'images' => $request->get('images', []),
-            'socials' => $request->get('socials', [])
+            'city_id' => $request->get('city_id')
         ]);
     }
 }

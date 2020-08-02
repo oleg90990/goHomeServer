@@ -10,7 +10,7 @@ use App\Enums\Gender;
 use App\Enums\YesNo;
 use App\Enums\Social;
 use App\Classes\SocialProvider;
-use App\DTO\{
+use App\DTO\Ad\{
     CreateAdData,
     UpdateAdData,
     FindAdData
