@@ -22,12 +22,10 @@ class UserController extends Controller
     {
         $data = UserLoginData::fromRequest($request);
 
-        try {
-            $user = $repository->login($data);
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                $e->getMessage(), 403
-            ); 
+        $user = $repository->login($data);
+
+        if (!$user) {
+            return $this->errorResponse('Пользователь не найден', 403); 
         }
 
         return $this->successResponse([
@@ -40,13 +38,7 @@ class UserController extends Controller
     {
         $data = UserRegisterData::fromRequest($request);
 
-        try {
-            $user = $repository->register($data);
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                $e->getMessage(), 403
-            ); 
-        }
+        $user = $repository->register($data);
 
         return $this->successResponse([
             'access_token' => $user->createAccessToken(),
@@ -58,13 +50,7 @@ class UserController extends Controller
     {
         $data = UserUpdateData::fromRequest($request);
 
-        try {
-            $user = $repository->update($data, $request->user());
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                $e->getMessage(), 403
-            ); 
-        }
+        $user = $repository->update($data, $request->user());
 
         return $this->successResponse(
             new UserProfileResource($user)

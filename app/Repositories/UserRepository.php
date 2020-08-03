@@ -26,7 +26,7 @@ class UserRepository
         ]);
 
         if (!$auth) { 
-            throw new \Exception('Пользователь не найден');
+            return null;
         }
 
         return auth()->user();
@@ -52,19 +52,20 @@ class UserRepository
      *
      * @return Ad
      */
-    public function update(UserUpdateData $data, User $user): ?User
+    public function update(UserUpdateData $data, User $user): User
     {
-        $userData = [
+        $update = [
             'name' => $data->name,
             'email' => $data->email,
             'city_id' => $data->city_id
         ];
 
         if ($data->password) {
-            $userData['password'] = $data->password;
+            $update['password'] = $data->password;
         }
 
         $user->update($userData);
+
         return $user;
     }
 
