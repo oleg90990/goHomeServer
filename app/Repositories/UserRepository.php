@@ -64,7 +64,7 @@ class UserRepository
             $update['password'] = $data->password;
         }
 
-        $user->update($userData);
+        $user->update($update);
 
         return $user;
     }
