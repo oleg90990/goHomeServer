@@ -2,6 +2,7 @@
 
 namespace App\Classes\Helpers;
 
+use Storage;
 use App\Ad;
 use App\DTO\Vk\VkInfoData;
 use App\Classes\Social\Vk;
@@ -60,7 +61,6 @@ class VkPhotoUploader
         $client = new HttpClient;
 
         try {
-
             $files = $photos->map(function($photo, $key) {
                 return [
                     'name' => "file$key",

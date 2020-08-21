@@ -18,7 +18,7 @@ class BreedResource extends JsonResource
         return [
             'name' => $this->name,
             'id' => $this->id,
-            'img' => ImageManipulator::getPublicUri($this->img)
+            'img' => asset('/storage/' . $this->img)
         ];
     }
 }

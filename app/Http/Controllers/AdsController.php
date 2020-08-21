@@ -63,10 +63,7 @@ class AdsController extends Controller
 
     public function find(AdsFindRequest $request, AdRepository $repository) {
         $data = FindAdData::fromRequest($request);
-
-        $ads = $repository
-            ->find($data);
-
+        $ads = $repository->find($data);
         return $this->successResponse([
            'items' => AdResource::collection($ads),
            'lastPage' => $ads->lastPage(),

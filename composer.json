@@ -18,6 +18,8 @@
         "fruitcake/laravel-cors": "^2.0",
         "gumlet/php-image-resize": "^1.9",
         "guzzlehttp/guzzle": "^6.5",
+        "intervention/image": "^2.5",
+        "intervention/imagecache": "^2.4",
         "laravel/framework": "^7.0",
         "laravel/passport": "^9.2",
         "laravel/tinker": "^2.0",

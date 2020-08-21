@@ -62,23 +62,27 @@ class Ad extends Model
         return $this->hasMany(AdVkpost::class);
     }
 
-    public function getPhotos() {
+    public function getPhotos()
+    {
         return $this->photos;
     }
 
-    public function getColorsIds() {
+    public function getColorsIds()
+    {
         return $this->colors()->get()
             ->map(function($color) {
                 return $color->id;
             });
     }
 
-    public function setPhotos(array $photos) {
+    public function setPhotos(array $photos)
+    {
         $paths = ImageManipulator::saveFromBase64($photos, $this->user);
 
-        $this->photos()
-            ->whereNotIn('path', $paths)
-            ->delete();
+        $this
+          ->photos()
+          ->whereNotIn('path', $paths)
+          ->delete();
 
         $photos = $this->photos()->get();
 
@@ -94,17 +98,31 @@ class Ad extends Model
             return ['path' => $path];
         }, $paths);
 
-        $this->photos()
-            ->createMany($models);
+        $this
+          ->photos()
+          ->createMany($models);
     }
 
-    public function getPublicUrlPhotos() {
+    public function getThumbnail()
+    {
+      $first = $this->photos->first();
+
+      if (!$first) {
+        return null;
+      }
+
+      return $first->getThumbnailUrl();
+    }
+
+    public function getOriginalPhotos()
+    {
         return $this->photos->map(function($photo){
-            return $photo->getPublicUrl();
+            return $photo->getOriginalUrl();
         });
     }
 
-    public function setColors(array $colors) {
+    public function setColors(array $colors)
+    {
         $this->colors()->sync($colors);
     }
 }

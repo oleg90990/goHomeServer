@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Storage;
 use Illuminate\Database\Eloquent\Model;
 use App\Classes\ImageManipulator;
 
@@ -28,12 +29,18 @@ class AdPhoto extends Model
         'vk' => 'array',
     ];
 
-    public function getPublicUrl()
+    public function getOriginalUrl()
     {
-       return ImageManipulator::getPublicUri($this->path);
+      return ImageManipulator::getOriginalUrl($this->path);
     }
 
-    public function getVkId() {
+    public function getThumbnailUrl()
+    {
+      return ImageManipulator::getThumbnailUrl($this->path);
+    }
+
+    public function getVkId()
+    {
         return "photo" . $this->vk['owner_id'] . '_' . $this->vk['id'];
     }
 }

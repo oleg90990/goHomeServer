@@ -2,58 +2,70 @@
 
 namespace App\Classes;
 
-use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Image;
 use Storage;
-use Gumlet\ImageResize;
 
 class ImageManipulator
 {
+    public static $templates = [
+      'original' => [800],
+      'thumbnail' => [600, 300]
+    ];
 
-    const PublicPath = '/storage/';
-
-    public static function saveForUser(int $userId, string $image)
-    {
-        $name = "photos/$userId/" . uniqid() . ".jpeg";
-        return Storage::disk('public')->put($name, $image) ? $name : false;
+    private static function disk() {
+      return Storage::disk('photos');
     }
 
-    public static function resize(string $base64) {
-        $img = ImageResize::createFromString($base64);
-        $img->resizeToWidth(800);
-        return $img->getImageAsString();
+    public static function getOriginalUrl(string $path)
+    {
+      return self::disk('photos')->url($path . '/original.png');
+    }
+
+    public static function getThumbnailUrl(string $path)
+    {
+      return self::disk('photos')->url($path . '/thumbnail.png');
+    }
+
+    public static function fopen(string $path)
+    {
+      return fopen(self::disk('photos')->path($path . '/original.png'), 'rb');
+    }
+
+    private static function fromHttp(string $image)
+    {
+      $path = parse_url($image)['path'];
+      $path = str_replace('/storage/photos/', '', $path);
+      $path = str_replace('/original.png', '', $path);
+      return $path;
+    }
+
+    private static function fromBase64(string $image, $name)
+    {
+      foreach (self::$templates as $template => $sizes) {
+        $img = call_user_func_array([Image::make($image), 'resize'], $sizes)->encode();
+
+        if ($img) {
+          self::disk('photos')->put($name . "/$template.png", $img);
+        }
+      }
+
+      return $name;
     }
 
     public static function saveFromBase64(array $images, User $user)
     {
-        $results = [];
+      function createName($user) {
+        return "$user->id/" . uniqid();
+      }
 
-        foreach ($images as $image) {
-            if (strpos($image, 'http') !== false) {
-                $parse_url = parse_url($image);
-                $results[] = str_replace(self::PublicPath, '', $parse_url['path']);
-            } else {
-                $string = self::resize(base64_decode($image));
-
-                if ($name = self::saveForUser($user->id, $string)) {
-                    $results[] = $name;
-                }
-            }
-        }
-
-        return $results;
-    }
-
-    public static function getPublicUri(string $path) {
-        return asset(self::PublicPath . $path);
-    }
-
-    public static function fullPath(string $path) {
-        return Storage::disk('public')->path($path);
-    }
-
-    public static function fopen(string $path) {
-        return fopen(self::fullPath($path), 'rb');
+      return array_map(function($image) use ($user) {
+        if (strpos($image, 'http') !== false) {
+            return self::fromHttp($image);
+          } else {
+            return self::fromBase64($image, createName($user));
+          }
+      }, $images);
     }
 }
 
