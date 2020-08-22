@@ -181,6 +181,6 @@ class AdRepository
            $query->orderBy('age', 'asc');
         }
 
-        return $query->paginate(5, ['*'], 'page', $data->page);
+        return $query->paginate(20, ['*'], 'page', $data->page);
     }
 }
