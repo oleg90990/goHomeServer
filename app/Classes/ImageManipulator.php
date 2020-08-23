@@ -9,8 +9,14 @@ use Storage;
 class ImageManipulator
 {
     public static $templates = [
-      'original' => [800],
-      'thumbnail' => [600, 300]
+      'original' => [
+        'method' => 'resize',
+        'args' => [800]
+      ],
+      'thumbnail' => [
+        'method' => 'fit',
+        'args' => [600, 300]
+      ]
     ];
 
     private static function disk() {
@@ -42,8 +48,8 @@ class ImageManipulator
 
     private static function fromBase64(string $image, $name)
     {
-      foreach (self::$templates as $template => $sizes) {
-        $img = call_user_func_array([Image::make($image), 'resize'], $sizes)->encode();
+      foreach (self::$templates as $template => $func) {
+        $img = call_user_func_array([Image::make($image), $func['method']], $func['fit'])->encode();
 
         if ($img) {
           self::disk('photos')->put($name . "/$template.png", $img);

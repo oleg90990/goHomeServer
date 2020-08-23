@@ -61,6 +61,18 @@ class AdsController extends Controller
         );
     }
 
+    public function post(AdRepository $repository, string $id) {
+        $post = $repository->getPost($id);
+
+        if (!$post) {
+          return $this->errorResponse('Пост не найден', 404); 
+        }
+
+        return $this->successResponse(
+          new AdResource($post)
+        );
+    }
+
     public function find(AdsFindRequest $request, AdRepository $repository) {
         $data = FindAdData::fromRequest($request);
         $ads = $repository->find($data);

@@ -183,4 +183,15 @@ class AdRepository
 
         return $query->paginate(20, ['*'], 'page', $data->page);
     }
+
+    /**
+     * Publish Ad
+     *
+     * @param Ad
+     * @param bool
+     * @return void
+     */
+    public function getPost(string $id): ?Ad {
+      return Ad::where('active', 1)->find($id);
+    }
 }
