@@ -49,7 +49,7 @@ class ImageManipulator
     private static function fromBase64(string $image, $name)
     {
       foreach (self::$templates as $template => $func) {
-        $img = call_user_func_array([Image::make($image), $func['method']], $func['fit'])->encode();
+        $img = call_user_func_array([Image::make($image), $func['method']], $func['args'])->encode();
 
         if ($img) {
           self::disk('photos')->put($name . "/$template.png", $img);
