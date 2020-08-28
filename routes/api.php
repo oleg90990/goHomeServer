@@ -18,7 +18,7 @@ Route::post('user/register', 'UserController@register');
 Route::get('dictionaries', 'DictionariesController@view');
 Route::post('dictionaries/city', 'DictionariesController@city');
 Route::post('posts/find', 'AdsController@find');
-Route::get('posts/{id}', 'AdsController@post');
+Route::get('posts/{id}', 'AdsController@post')->where('id', '[0-9]+');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('user/update', 'UserController@update');
