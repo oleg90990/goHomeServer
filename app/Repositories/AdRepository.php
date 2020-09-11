@@ -192,6 +192,6 @@ class AdRepository
      * @return void
      */
     public function getPost(string $id): ?Ad {
-      return Ad::where('active', 1)->find($id);
+      return Ad::find($id);
     }
 }

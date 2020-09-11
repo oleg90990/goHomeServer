@@ -43,10 +43,8 @@ class AdsController extends Controller
     public function store(AdsCreateRequest $request, AdRepository $repository)
     {
         $data = CreateAdData::fromRequest($request);
-
         $ad = $repository
             ->create($data, $this->user);
-
         return $this->successResponse(
             new AdResource($ad)
         );
@@ -55,7 +53,6 @@ class AdsController extends Controller
     public function me(AdRepository $repository) {
         $ads = $repository
             ->getAllFromUser($this->user);
-
         return $this->successResponse(
             AdResource::collection($ads)
         );

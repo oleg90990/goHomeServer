@@ -33,7 +33,7 @@ class AdsCreateRequest extends FormRequest
             'sterilization' => 'required|enum_value:' . YesNo::class,
             "breed_id" => 'numeric',
             "animal_id" => 'required|numeric',
-            "city_id" => 'required|numeric',
+            "city_id" => 'required|numeric|not_in:0',
             'socials.*' => 'enum_value:' . Social::class
         ];
     }
